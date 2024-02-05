@@ -1,4 +1,4 @@
-import './style.css'; // Import the CSS file
+import './PostItem.css'; // Import the CSS file
 
 function PostItem({ text, picture, author, date }) {
     return (

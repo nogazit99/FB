@@ -1,0 +1,20 @@
+
+.input-group {
+    height: 40px;
+
+}
+
+.form-control {
+    text-align: center;
+}
+
+.box-container {
+    border: 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px ;
+    width: 50rem;
+    height: 80px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}

@@ -1,5 +1,5 @@
 // Navbar.js
-import './style.css'; // Import the CSS file
+import './NavBar.css'; // Import the CSS file
 import React, { useState } from 'react';
 
 const Navbar = () => {
