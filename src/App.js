@@ -1,27 +1,12 @@
-// // App.js
-
-// import React from 'react';
-// import Navbar from './NavBar';
-
-// const App = () => {
-//   return (
-//     <div>
-//       <Navbar />
-//       {/* Your other content */}
-//     </div>
-//   );
-// };
-
-// export default App;
-
 // App.js
 
 import React from 'react';
 import Navbar from './NavBar';
 import Menu from './Menu';
+import ThinkBox from './ThinkBox';
 import './style.css'; // Import your CSS file
 
-const App = () => {
+function App() {
   return (
     <div>
       <Navbar />
@@ -31,7 +16,14 @@ const App = () => {
             <Menu />
           </div>
           <div className="col-9">
-            column
+            <div className="row" style={{ height: '150px' }}>
+              <ThinkBox />
+            </div>
+            <div className="row" style={{ height: 'calc(100% - 150px)' }}>
+              
+              Main
+              
+            </div>
           </div>
         </div>
       </div>
