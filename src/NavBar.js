@@ -12,8 +12,10 @@ const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
-            <div className="container-fluid d-flex justify-content-center align-items-center">
-                <a className="navbar-brand" href="#">FooBar</a>
+            <div className="container-fluid d-flex justify-content-start align-items-center">
+                <a className="navbar-brand" href="#">
+                <img src="/logo2.svg" alt="Logo" height="55"/>
+                </a>
 
                 <form className="d-flex">
                     {/* Search input for larger screens */}
@@ -25,7 +27,7 @@ const Navbar = () => {
 
                     {/* Search button for smaller screens */}
                     <button
-                        className="btn btn-outline-primary d-lg-none"
+                        className="btn btn-outline-secondary d-lg-none"
                         onClick={toggleSearchVisibility}
                         type="button"
                     >
