@@ -10,11 +10,11 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg">
+        <nav className="navbar navbar-expand-lg sticky-top">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             <div className="container-fluid d-flex justify-content-start align-items-center">
                 <a className="navbar-brand" href="#">
-                <img src="/logo2.svg" alt="Logo" height="55"/>
+                    <img src="/logo2.svg" alt="Logo" height="55" />
                 </a>
 
                 <form className="d-flex">
@@ -45,6 +45,12 @@ const Navbar = () => {
                         />
                     )}
                 </form>
+                {/* Round Image */}
+                <img
+                    src="/profile1.svg"
+                    alt="Profile Image"
+                    className="rounded-circle profile-image"
+                />
             </div>
         </nav>
     );

@@ -4,9 +4,16 @@ import React from 'react';
 import Navbar from './NavBar';
 import Menu from './Menu';
 import ThinkBox from './ThinkBox';
+import Posts from './Posts';
+import PostItem from './PostItem';
 import './style.css'; // Import your CSS file
 
 function App() {
+
+  const PostsList = Posts.map((post, key) => {
+      return <PostItem {...post} key={key} />
+  });
+
   return (
     <div>
       <Navbar />
@@ -21,7 +28,7 @@ function App() {
             </div>
             <div className="row" style={{ height: 'calc(100% - 150px)' }}>
               
-              Main
+              {PostsList}
               
             </div>
           </div>

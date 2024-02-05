@@ -7,6 +7,12 @@ const Menu = () => {
         <ul class="list-group">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             <li class="list-group-item">
+                {/* Round Image */}
+                <img
+                    src="/profile1.svg" // Replace with the path to your image
+                    alt="Profile Image"
+                    className="rounded-circle profile-image"
+                />
                 <span className="menu-text">Profile</span>
             </li>
             <li class="list-group-item d-flex align-items-center">
