@@ -33,7 +33,7 @@ function App() {
               <ThinkBox addNewPost={addNewPost} />
             </div>
             <div className="row" style={{ height: 'calc(100% - 150px)' }}>
-              <Feed posts={posts} addNewPost={addNewPost} />
+              <Feed posts={posts} />
               
             </div>
           </div>

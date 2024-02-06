@@ -1,39 +1,8 @@
-// // Popup.js
-// import React from 'react';
-// import './AddPost.css';
-
-// const Popup = ({ handleClosePopup }) => {
-//     return (
-//         <div className="popup-container">
-//             <div className="popup" onClick={(e) => e.stopPropagation()}>
-//                 <div className="popup-content">
-//                     <button className="close-button" onClick={handleClosePopup}>
-//                         <i className="bi bi-x-circle"></i> 
-//                     </button>
-//                     <textarea 
-//                         className="form-control" 
-//                         placeholder="What's on your mind?..." 
-//                         rows="3"
-//                     ></textarea>
-//                     <button 
-//                         className="btn btn-primary mt-2" 
-//                         onClick={handleClosePopup}
-//                     >
-//                         Post
-//                     </button>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Popup;
-
 
 import React, { useState } from 'react';
 import './AddPost.css';
 
-const AddPost = ({ handleClosePopup, AddPost }) => {
+const AddPost = ({ handleClosePopup, addNewPost }) => {
     const [inputValue, setInputValue] = useState('');
 
     const handleInputChange = (event) => {
@@ -48,7 +17,7 @@ const AddPost = ({ handleClosePopup, AddPost }) => {
             authorN: 'John Doe', // Example author name
             date: new Date().toLocaleString() // Current date and time
         };
-        AddPost(newPost); // Call the addPost function to add the new post
+        addNewPost(newPost); // Call the addPost function to add the new post
         handleClosePopup(); // Close the popup after posting
         setInputValue(''); // Clear input after posting
     };

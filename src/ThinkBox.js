@@ -35,7 +35,7 @@ const ThinkBox = ({ addNewPost }) => {
             </div>
 
             {/* Popup window */}
-            {isPopupVisible && <AddPost handleClosePopup={handleClosePopup} AddPost={addNewPost}/>}
+            {isPopupVisible && <AddPost handleClosePopup={handleClosePopup} addNewPost={addNewPost}/>}
         </div>
     );
 };
