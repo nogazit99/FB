@@ -1,16 +1,38 @@
 import './PostItem.css'; // Import the CSS file
 
-function PostItem({ text, picture, author, date }) {
+function PostItem({ text, picture, authorP, authorN, date }) {
     return (
-        <div className="card" style={{ width: '50rem' }}>
+        <div className="card mb-3" style={{ width: '50rem' }}>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
+            <div className="card-header d-flex justify-content-between align-items-center">
+                <div className="d-flex align-items-center justify-content-center">
+                    <img src={authorP} className="rounded-circle me-2" alt="Author" style={{ width: '40px', height: '40px' }} />
+                    <span className="author-name">{authorN}</span>
+                </div>
+                <div className="text-muted">{date}</div>
+            </div>
+
             <div className="card-body">
                 <p className="card-text">{text}</p>
             </div>
-            <img src={picture} className="card-img-top" alt="..." />
-            
+            {picture && <img src={picture} className="card-img-top" alt="Post" />}
+            <div className="card-footer d-flex justify-content-between align-items-center">
+                <button type="button" className="btn btn-outline-secondary">
+                    <i className="bi bi-heart"></i> Like
+                </button>
+                <button type="button" className="btn btn-outline-secondary">
+                    <i className="bi bi-chat-dots"></i> Comment
+                </button>
+                <button type="button" className="btn btn-outline-secondary">
+                    <i className="bi bi-share"></i> Share
+                </button>
+            </div>
+
         </div>
     );
 }
+
+
 
 
 export default PostItem;
