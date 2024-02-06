@@ -1,6 +1,17 @@
 import './PostItem.css'; // Import the CSS file
+import LikeButton from './Like';
+import ShareButton from './Share';
+import CommentButton from './Comment';
+import React, { useState } from 'react';
 
 function PostItem({ text, picture, authorP, authorN, date }) {
+
+    const [liked, setLiked] = useState(false);
+
+    const handleLikeClick = () => {
+        setLiked(!liked);
+    };
+
     return (
         <div className="card mb-3" style={{ width: '50rem' }}>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
@@ -17,22 +28,16 @@ function PostItem({ text, picture, authorP, authorN, date }) {
             </div>
             {picture && <img src={picture} className="card-img-top" alt="Post" />}
             <div className="card-footer d-flex justify-content-between align-items-center">
-                <button type="button" className="btn btn-outline-secondary">
-                    <i className="bi bi-heart"></i> Like
-                </button>
+                <LikeButton liked={liked} handleLikeClick={handleLikeClick} />
                 <button type="button" className="btn btn-outline-secondary">
                     <i className="bi bi-chat-dots"></i> Comment
                 </button>
-                <button type="button" className="btn btn-outline-secondary">
-                    <i className="bi bi-share"></i> Share
-                </button>
+                <ShareButton />
             </div>
 
         </div>
     );
 }
-
-
 
 
 export default PostItem;

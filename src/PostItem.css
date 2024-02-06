@@ -32,13 +32,3 @@
     margin: 10px;
 }
 
-.btn-outline-secondary {
-    border:0;
-    text-align: center;
-    width: 500px;
-}
-
-.btn-outline-secondary:hover {
-    background-color: rgb(225, 225, 225);
-    color: gray;
-}

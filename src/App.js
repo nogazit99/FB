@@ -1,18 +1,24 @@
 // App.js
 
-import React from 'react';
+import React , { useState } from 'react';
 import Navbar from './NavBar';
 import Menu from './Menu';
 import ThinkBox from './ThinkBox';
 import Posts from './Posts';
+import AddPost from './AddPost';
+import Feed from './Feed';
 import PostItem from './PostItem';
 import './style.css'; // Import your CSS file
 
 function App() {
 
-  const PostsList = Posts.map((post, key) => {
-      return <PostItem {...post} key={key} />
-  });
+  const [posts, setPosts] = useState(Posts); // State to manage the list of posts
+
+  // Function to add a new post to the list
+  const addNewPost = (newPost) => {
+    setPosts([newPost, ...posts]);
+  };
+
 
   return (
     <div>
@@ -23,12 +29,11 @@ function App() {
             <Menu />
           </div>
           <div className="col-9">
-            <div className="row" style={{ height: '150px' }}>
-              <ThinkBox />
+            <div className="row" style={{ height: '110px' }}>
+              <ThinkBox addNewPost={addNewPost} />
             </div>
             <div className="row" style={{ height: 'calc(100% - 150px)' }}>
-              
-              {PostsList}
+              <Feed posts={posts} addNewPost={addNewPost} />
               
             </div>
           </div>
