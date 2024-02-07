@@ -13,6 +13,7 @@ function PostItem({ text, picture, authorP, authorN, date }) {
     };
 
     return (
+    <div className="card-container">
         <div className="card mb-3" style={{ width: '50rem' }}>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             <div className="card-header d-flex justify-content-between align-items-center">
@@ -26,7 +27,11 @@ function PostItem({ text, picture, authorP, authorN, date }) {
             <div className="card-body">
                 <p className="card-text">{text}</p>
             </div>
-            {picture && <img src={picture} className="card-img-top" alt="Post" />}
+            {picture && (
+                <div className="post-image-container">
+                    <img src={picture} className="post-image" alt="Post" />
+                </div>
+            )}
             <div className="card-footer d-flex justify-content-between align-items-center">
                 <LikeButton liked={liked} handleLikeClick={handleLikeClick} />
                 <button type="button" className="btn btn-outline-secondary">
@@ -35,6 +40,7 @@ function PostItem({ text, picture, authorP, authorN, date }) {
                 <ShareButton />
             </div>
 
+        </div>
         </div>
     );
 }
