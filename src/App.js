@@ -27,6 +27,16 @@ function App() {
   };
 
 
+  // Function to edit a post
+  const editPost = (postId, editedContent) => {
+    setPosts(posts.map(post => {
+      if (post.id === postId) {
+        return { ...post, text: editedContent };
+      }
+      return post;
+    }));
+  };
+
   return (
     <div>
       <Navbar />
@@ -40,9 +50,7 @@ function App() {
               <ThinkBox addNewPost={addNewPost} />
             </div>
             <div className="row" style={{ height: 'calc(100% - 150px)' }}>
-              <Feed posts={posts} onDeletePost={deletePost} 
-              //onEditPost={handleEditPost} 
-              />
+              <Feed posts={posts} onDeletePost={deletePost} onEditPost={editPost} />
 
             </div>
           </div>
