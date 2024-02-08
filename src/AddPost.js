@@ -8,6 +8,7 @@ const AddPost = ({ handleClosePopup, addNewPost }) => {
     const [imagePreview, setImagePreview] = useState(null);
     const [isInputEmpty, setIsInputEmpty] = useState(true);
     const inputRef = useRef(null);
+    const [postIdCounter, setPostIdCounter] = useState(11); // Initialize the counter with 1
 
     useEffect(() => {
         // Focus on the textarea when the component mounts
@@ -35,6 +36,7 @@ const AddPost = ({ handleClosePopup, addNewPost }) => {
     const handlePost = () => {
         if (!isInputEmpty|| image) {   
         const newPost = {
+            id: postIdCounter, // Assign the current value of the counter as the post ID
             text: inputValue,
             picture: image ? URL.createObjectURL(image) : '', // Set picture to URL if an image is attached
             authorP: '/profile1.svg', 
@@ -42,6 +44,7 @@ const AddPost = ({ handleClosePopup, addNewPost }) => {
             date: new Date().toLocaleString() // Current date and time
         };
         addNewPost(newPost); // Call the addPost function to add the new post
+        setPostIdCounter(postIdCounter + 1); // Increment the counter for the next post
         handleClosePopup(); // Close the popup after posting
         setInputValue(''); // Clear input after posting
         setIsInputEmpty(true); // Reset input validation

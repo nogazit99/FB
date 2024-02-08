@@ -1,9 +1,14 @@
 import React from 'react';
 import PostItem from './PostItem';
 
-const Feed = ({ posts}) => {
-  const PostsList = posts.map((post, key) => {
-    return <PostItem {...post} key={key} />;
+const Feed = ({ posts, onDeletePost }) => {
+  const PostsList = posts.map((post) => {
+    return <PostItem 
+              {...post} 
+              key={post.id} 
+              onDeletePost={onDeletePost} 
+              //onEditPost={onEditPost}
+              />;
   });
 
   return (
