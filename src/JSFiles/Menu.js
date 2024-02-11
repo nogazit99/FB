@@ -4,6 +4,7 @@ import '../StyleFiles/Menu.css'; // Import the CSS file
 
 const Menu = () => {
     return (
+        <div className="menu-container">
         <ul class="list-group">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             <li class="list-group-item">
@@ -33,6 +34,7 @@ const Menu = () => {
                 <span className="menu-text">Videos</span>
             </li>
         </ul>
+        </div>
     );
 };
 

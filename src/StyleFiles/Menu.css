@@ -1,3 +1,8 @@
+/* Menu.css */
+.menu-container {
+    position: fixed;
+}
+
 .list-group {
     padding-top: 10px;
     border: 0;
@@ -29,3 +34,5 @@
 .night-mode .menu-text {
     color: white;
 }
+
+
