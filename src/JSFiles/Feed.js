@@ -1,5 +1,5 @@
 import React from 'react';
-import PostItem from './PostItem';
+import PostItem from './Post/PostItem';
 
 const Feed = ({ posts, onDeletePost, onEditPost }) => {
   const PostsList = posts.map((post) => {

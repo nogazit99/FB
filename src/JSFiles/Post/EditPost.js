@@ -1,5 +1,5 @@
 import React from 'react';
-import './EditPost.css';
+import '../../StyleFiles/EditPost.css';
 
 const EditPostButton = ({ onClick }) => {
     return (

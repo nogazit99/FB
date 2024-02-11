@@ -1,7 +1,7 @@
-import './PostItem.css'; // Import the CSS file
-import LikeButton from './Like';
-import ShareButton from './Share';
-import CommentButton from './Comment';
+import '../../StyleFiles/PostItem.css'; // Import the CSS file
+import LikeButton from '../Like';
+import ShareButton from '../Share';
+import CommentButton from '../Comment';
 import React, { useState } from 'react';
 import EditPost from './EditPost';
 import EditPostForm from './EditPostForm'; // Import the EditPostForm component

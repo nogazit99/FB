@@ -1,5 +1,5 @@
 // Navbar.js
-import './NavBar.css'; // Import the CSS file
+import '../StyleFiles/NavBar.css'; // Import the CSS file
 import React, { useState } from 'react';
 
 const Navbar = ({ toggleNightMode, nightMode }) => {

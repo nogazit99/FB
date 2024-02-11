@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './ButtonStyle.css'; // Import the CSS file
+import '../StyleFiles/ButtonStyle.css'; // Import the CSS file
 
 
 const CommentButton = () => {

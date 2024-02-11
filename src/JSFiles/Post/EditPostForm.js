@@ -1,5 +1,5 @@
 // EditPostForm.js
-import './EditPostForm.css'
+import '../../StyleFiles/EditPostForm.css'
 import React, { useState, useEffect, useRef } from 'react';
 
 const EditPostForm = ({ id, initialText, onSave, onCancel, onEditPost }) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import './DeletePost.css';
+import '../../StyleFiles/DeletePost.css';
 
 const DeletePostButton = ({ onClick }) => {
     return (
