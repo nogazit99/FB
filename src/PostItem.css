@@ -28,3 +28,15 @@
     margin: 10px;
 }
 
+.night-mode .card {
+    background-color: #8a8888;
+}
+
+.night-mode .card-text {
+    color: white; /* Set text color to white */
+}
+
+.night-mode .text-muted {
+    color: white; /* Set date color to white */
+}
+

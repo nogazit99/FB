@@ -12,3 +12,7 @@
     background-color: rgb(225, 225, 225);
     color: gray;
 }
+
+.night-mode .btn-outline-secondary{
+    color:white;
+}

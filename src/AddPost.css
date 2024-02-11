@@ -35,3 +35,8 @@
     background-color: transparent;
     border: 0;
 }
+
+
+.night-mode .popup-content{
+    background-color: #454444;
+}

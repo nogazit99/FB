@@ -14,7 +14,7 @@ import './style.css'; // Import your CSS file
 function App() {
 
   const [posts, setPosts] = useState(Posts); // State to manage the list of posts
-
+  const [nightMode, setNightMode] = useState(false); // State to track night mode
 
   // Function to add a new post to the list
   const addNewPost = (newPost) => {
@@ -37,9 +37,14 @@ function App() {
     }));
   };
 
+  // Function to toggle night mode
+  const toggleNightMode = () => {
+    setNightMode(!nightMode);
+  };
+
   return (
-    <div>
-      <Navbar />
+    <div className={`app-container ${nightMode ? 'night-mode' : ''}`}>
+      <Navbar toggleNightMode={toggleNightMode} nightMode={nightMode} />
       <div className="container-fluid">
         <div className="row">
           <div className="col-3">
