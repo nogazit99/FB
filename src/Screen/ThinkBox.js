@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import '../StyleFiles/ThinkBox.css'; // Import the CSS file
-import AddPost from './Post/AddPost'; // Import the Popup component
+import './ThinkBox.css'; // Import the CSS file
+import AddPost from '../Post/Add/AddPost'; // Import the Popup component
 
 const ThinkBox = ({ addNewPost }) => {
     const [isPopupVisible, setPopupVisible] = useState(false);

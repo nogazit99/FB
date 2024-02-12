@@ -1,11 +1,11 @@
-import '../../StyleFiles/PostItem.css'; // Import the CSS file
-import LikeButton from '../Like';
-import ShareButton from '../Share';
-import CommentButton from '../Comment';
+import './PostItem.css'; // Import the CSS file
+import LikeButton from '../PostButtons/LikeButton';
+import ShareButton from '../PostButtons/ShareButton';
+import CommentButton from '../PostButtons/Comment/CommentButton';
 import React, { useState } from 'react';
-import EditPost from './EditPost';
-import EditPostForm from './EditPostForm'; // Import the EditPostForm component
-import DeletePost from './DeletePost';
+import EditPost from './Edit/EditPost';
+import EditPostForm from './Edit/EditPostForm'; // Import the EditPostForm component
+import DeletePost from './Delete/DeletePost';
 
 function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onEditPost }) {
 

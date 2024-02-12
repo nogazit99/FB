@@ -1,5 +1,5 @@
 import React from 'react';
-import '../StyleFiles/ButtonStyle.css'; // Import the CSS file
+import './ButtonStyle.css'; // Import the CSS file
 
 const ShareButton = () => {
     return (

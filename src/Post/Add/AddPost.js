@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import '../../StyleFiles/AddPost.css';
+import './AddPost.css';
 
 const AddPost = ({ handleClosePopup, addNewPost }) => {
     const [inputValue, setInputValue] = useState('');
