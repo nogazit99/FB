@@ -2,7 +2,9 @@ import './PostItem.css'; // Import the CSS file
 import LikeButton from '../PostButtons/LikeButton';
 import ShareButton from '../PostButtons/ShareButton';
 import CommentButton from '../PostButtons/Comment/CommentButton';
-import React, { useState } from 'react';
+import Comment from '../PostButtons/Comment/Comment';
+import CommentPopUp from '../PostButtons/Comment/CommentPopUp';
+import React, { useState, useEffect } from 'react';
 import EditPost from './Edit/EditPost';
 import EditPostForm from './Edit/EditPostForm'; // Import the EditPostForm component
 import DeletePost from './Delete/DeletePost';
@@ -22,6 +24,35 @@ function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onE
     const handleSaveEdit = (editedText) => {
         onEditPost(id, editedText); // Call the onEditPost function with the id and edited content
         setEditing(false);
+    };
+
+
+    const [showComments, setShowComments] = useState(false);
+    const [comments, setComments] = useState([]);
+
+    const toggleComments = () => {
+        setShowComments(!showComments);
+    };
+
+    const addComment = (newComment) => {
+        // Add new comment to the comments state
+        const newCommentObject = { id: comments.length + 1, text: newComment };
+        setComments([...comments, newCommentObject]);
+    };
+
+    const deleteComment = (commentId) => {
+        // Remove comment with specified ID from the comments state
+        setComments(comments.filter(comment => comment.id !== commentId));
+    };
+
+    const editComment = (commentId, editedContent) => {
+        // Edit comment with specified ID
+        setComments(comments.map(comment => {
+            if (comment.id === commentId) {
+                return { ...comment, text: editedContent };
+            }
+            return comment;
+        }));
     };
 
     const [liked, setLiked] = useState(false);
@@ -74,13 +105,17 @@ function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onE
                 )}
                 <div className="card-footer d-flex justify-content-between align-items-center">
                     <LikeButton liked={liked} handleLikeClick={handleLikeClick} />
-                    <button type="button" className="btn btn-outline-secondary">
-                        <i className="bi bi-chat-dots"></i> Comment
-                    </button>
+                    <CommentButton onClick={toggleComments} />
                     <ShareButton />
                 </div>
-
             </div>
+            {showComments && <CommentPopUp 
+                comments={comments} 
+                addComment={addComment} 
+                deleteComment={deleteComment} 
+                editComment={editComment} 
+                onClose={() => setShowComments(false)} 
+            />}
         </div>
     );
 }

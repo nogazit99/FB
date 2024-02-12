@@ -1,0 +1,11 @@
+.comment-popup-window {
+    width:50rem;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px ;
+}
+
+
+.night-mode .comment-popup-window {
+    background-color: darkgray;
+}
