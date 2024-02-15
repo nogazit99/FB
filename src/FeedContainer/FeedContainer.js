@@ -14,14 +14,17 @@ import '../Screen/style.css'; // Import your CSS file
 function FeedContainer({ usersData, username }) {
 
     const userData = usersData[username];
+    const [postIdCounter, setPostIdCounter] = useState(11); // Initialize the counter with a unique value
 
     const [posts, setPosts] = useState(Posts); // State to manage the list of posts
     const [nightMode, setNightMode] = useState(false); // State to track night mode
   
     // Function to add a new post to the list
     const addNewPost = (newPost) => {
-        const postWithUserData = { ...newPost, displayName: userData.displayName, profilePicture: userData.profilePicture, liked: false };
+        const postWithUserData = { ...newPost, displayName: userData.displayName, profilePicture: userData.profilePicture };
         setPosts([postWithUserData, ...posts]);
+        setPostIdCounter(prevCounter => prevCounter + 1); // Increment the counter for the next post
+
     };
     
   
@@ -63,7 +66,9 @@ function FeedContainer({ usersData, username }) {
                   <ThinkBox 
                   addNewPost={addNewPost}
                   proPic={userData.profilePicture}
-                  authorName={userData.displayName} />
+                  authorName={userData.displayName}
+                  postIdCounter={postIdCounter} 
+                  setPostIdCounter={setPostIdCounter} />
                 </div>
                 <div className="row" style={{ height: 'calc(100% - 150px)' }}>
                   <Feed posts={posts} 

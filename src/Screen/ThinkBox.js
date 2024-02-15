@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ThinkBox.css'; // Import the CSS file
 import AddPost from '../Post/Add/AddPost'; // Import the Popup component
 
-const ThinkBox = ({ addNewPost , proPic, authorName}) => {
+const ThinkBox = ({ addNewPost , proPic, authorName, postIdCounter, setPostIdCounter}) => {
     const [isPopupVisible, setPopupVisible] = useState(false);
 
     const handleInputClick = () => {
@@ -38,8 +38,10 @@ const ThinkBox = ({ addNewPost , proPic, authorName}) => {
             {isPopupVisible && <AddPost 
                                 handleClosePopup={handleClosePopup}
                                 addNewPost={addNewPost}
-                                //authorName={authorName} 
-                                //proPic={proPic}
+                                authorName={authorName} 
+                                proPic={proPic}
+                                postIdCounter={postIdCounter}
+                                setPostIdCounter={setPostIdCounter} 
                                 />}
         </div>
     );
