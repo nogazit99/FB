@@ -1,0 +1,25 @@
+.error {
+    color: red;
+    font-size: 0.8rem; 
+}
+
+.image-preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.image-preview-wrapper {
+    max-width: 50%;
+    max-height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px; /* Add some space between the label and the image */
+}
+
+.image-preview {
+    width: 100%;
+    height: auto;
+}
