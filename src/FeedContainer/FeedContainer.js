@@ -1,5 +1,13 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import Navbar from '../Screen/NavBar';
+import Menu from '../Screen/Menu';
+import ThinkBox from '../Screen/ThinkBox';
+import Posts from '../Post/Posts';
+import AddPost from '../Post/Add/AddPost';
+import Feed from '../Screen/Feed';
+import PostItem from '../Post/PostItem';
+import EditPost from '../Post/Edit/EditPost'; // Import the EditPost component
+import '../Screen/style.css'; // Import your CSS file
 
 
 
@@ -7,29 +15,69 @@ function FeedContainer({ usersData, username }) {
 
     const userData = usersData[username];
 
-   
+    const [posts, setPosts] = useState(Posts); // State to manage the list of posts
+    const [nightMode, setNightMode] = useState(false); // State to track night mode
+  
+    // Function to add a new post to the list
+    const addNewPost = (newPost) => {
+        const postWithUserData = { ...newPost, displayName: userData.displayName, profilePicture: userData.profilePicture, liked: false };
+        setPosts([postWithUserData, ...posts]);
+    };
+    
+  
+    // Function to delete a post from the list
+    const deletePost = (postId) => {
+      setPosts(posts.filter(post => post.id !== postId));
+    };
+  
+  
+    // Function to edit a post
+    const editPost = (postId, editedContent) => {
+      setPosts(posts.map(post => {
+        if (post.id === postId) {
+          return { ...post, text: editedContent };
+        }
+        return post;
+      }));
+    };
+  
+    // Function to toggle night mode
+    const toggleNightMode = () => {
+      setNightMode(!nightMode);
+    };
+
+
     return (
-        <div>
-        <h1>Feed</h1>
-        <p>Welcome, {username}!</p>
-        {userData && (
-            <div>
-                <p>User Data:</p>
-                <ul>
-                    <li>password Name: {userData.password}</li>
-                    <li>Display Name: {userData.displayName}</li>
-                    <li>profilePicture:   <img 
-                                    src={URL.createObjectURL(userData.profilePicture)} 
-                                    alt="Profile" 
-                                    style={{ maxWidth: '200px', maxHeight: '200px' }} // Adjust size as needed
-                                /></li>
-                    {/* Add more data fields here */}
-                </ul>
+        <div className={`app-container ${nightMode ? 'night-mode' : ''}`}>
+          <Navbar toggleNightMode={toggleNightMode} 
+                  nightMode={nightMode} 
+                  userProfilePicture={userData.profilePicture}
+                  userDisplayName={userData.displayName}/>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-3">
+                <Menu />
+              </div>
+              <div className="col-9">
+                <div className="row" style={{ height: '110px' }}>
+                  <ThinkBox 
+                  addNewPost={addNewPost}
+                  proPic={userData.profilePicture}
+                  authorName={userData.displayName} />
+                </div>
+                <div className="row" style={{ height: 'calc(100% - 150px)' }}>
+                  <Feed posts={posts} 
+                        onDeletePost={deletePost} 
+                        onEditPost={editPost} />
+    
+                </div>
+              </div>
             </div>
-        )}
-    </div>
-);
+          </div>
+        </div>
+      );
+    };
+    
+    export default FeedContainer;
 
 
-}
-export default FeedContainer;

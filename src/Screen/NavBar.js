@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Popover } from 'bootstrap';
 
 
-const Navbar = ({ toggleNightMode, nightMode }) => {
+const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayName }) => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [isPopoverOpen, setIsPopoverOpen] = useState(false); // State for controlling popover visibility
     const [popoverContent, setPopoverContent] = useState(null); // State for popover content
@@ -33,12 +33,12 @@ const Navbar = ({ toggleNightMode, nightMode }) => {
                 <div className="popover-container">
                     <div className="popover-content">
                         <img
-                            src="/profile1.svg"
+                            src={URL.createObjectURL(userProfilePicture)}
                             alt="Profile Image"
                             className="rounded-circle profile-image"
                             style={{ width: '80px', height: '80px' }}
                         />
-                        <p>John Doe</p> {/* Replace with actual profile name */}
+                        <p>userDisplayName</p> {/* Replace with actual profile name */}
                     </div>
                 </div>
             );
@@ -82,7 +82,7 @@ const Navbar = ({ toggleNightMode, nightMode }) => {
                         onClick={togglePopover} // Toggle popover
                     >
                         <img
-                            src="/profile1.svg"
+                            src={URL.createObjectURL(userProfilePicture)}
                             alt="Profile Image"
                             className="rounded-circle profile-image"
                         />

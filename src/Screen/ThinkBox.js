@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ThinkBox.css'; // Import the CSS file
 import AddPost from '../Post/Add/AddPost'; // Import the Popup component
 
-const ThinkBox = ({ addNewPost }) => {
+const ThinkBox = ({ addNewPost , proPic, authorName}) => {
     const [isPopupVisible, setPopupVisible] = useState(false);
 
     const handleInputClick = () => {
@@ -18,7 +18,7 @@ const ThinkBox = ({ addNewPost }) => {
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             {/* Round Image */}
             <img
-                src="/profile1.svg" // Replace with the path to your image
+                src={URL.createObjectURL(proPic)}  // Replace with the path to your image
                 alt="Profile Image"
                 className="rounded-circle profile-image"
             />
@@ -35,7 +35,12 @@ const ThinkBox = ({ addNewPost }) => {
             </div>
 
             {/* Popup window */}
-            {isPopupVisible && <AddPost handleClosePopup={handleClosePopup} addNewPost={addNewPost}/>}
+            {isPopupVisible && <AddPost 
+                                handleClosePopup={handleClosePopup}
+                                addNewPost={addNewPost}
+                                //authorName={authorName} 
+                                //proPic={proPic}
+                                />}
         </div>
     );
 };
