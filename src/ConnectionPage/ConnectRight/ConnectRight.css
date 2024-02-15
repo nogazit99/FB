@@ -1,44 +1,15 @@
-/* LoginRight.css */
+
 .card {
-  max-width: 40rem;
-  width: 100%; /* Set default width to 100% */
-  margin: auto;
-  margin-top: 5rem;
+  width: 90%;
+  margin-top: -15vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)); /* Apply a drop shadow effect */
+    transition: transform 0.3s ease; /* Add smooth transition effect */
 }
 
-/* Media Query for smaller screens */
-@media (max-width: 576px) {
-  .card {
-      max-width: 100%; /* Set max width to 100% for smaller screens */
-      max-height: 30rem; /* Adjust max height for smaller screens */
-      height: auto; /* Ensure height adjusts dynamically */
+
+  /* Hover effect for the card */
+  .card:hover {
+    transform: scale(1.1); /* Scale the logo slightly on hover */
   }
-}
-
-/* Media Query for medium screens */
-@media (min-width: 576px) and (max-width: 768px) {
-  .card {
-      max-width: 30rem; /* Adjust max width for medium screens */
-      max-height: 40rem; /* Adjust max height for medium screens */
-      height: auto; /* Ensure height adjusts dynamically */
-  }
-}
-
-
-/* Media Query for large screens */
-@media (min-width: 768px) and (max-width: 992px) {
-  .card {
-      max-width: 40rem; /* Adjust max width for large screens */
-      max-height: 50rem; /* Adjust max height for large screens */
-      height: auto; /* Ensure height adjusts dynamically */
-  }
-}
-
-/* Media Query for extra-large screens */
-@media (min-width: 992px) {
-  .card {
-      max-width: 100rem; /* Adjust max width for extra-large screens */
-      max-height: 60rem; /* Adjust max height for extra-large screens */
-      height: auto; /* Ensure height adjusts dynamically */
-  }
-}
+  
