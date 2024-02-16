@@ -2,13 +2,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './AddPost.css';
 
-const AddPost = ({ handleClosePopup, addNewPost }) => {
+const AddPost = ({ handleClosePopup, addNewPost, authorName, proPic, postIdCounter, setPostIdCounter }) => {
     const [inputValue, setInputValue] = useState('');
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [isInputEmpty, setIsInputEmpty] = useState(true);
     const inputRef = useRef(null);
-    const [postIdCounter, setPostIdCounter] = useState(11); // Initialize the counter with 1
+    //const [postIdCounter, setPostIdCounter] = useState(11); // Initialize the counter with 1
 
     useEffect(() => {
         // Focus on the textarea when the component mounts
@@ -39,8 +39,8 @@ const AddPost = ({ handleClosePopup, addNewPost }) => {
             id: postIdCounter, // Assign the current value of the counter as the post ID
             text: inputValue,
             picture: image ? URL.createObjectURL(image) : '', // Set picture to URL if an image is attached
-            authorP: '/profile1.svg', 
-            authorN: 'John Doe',
+            authorP: URL.createObjectURL(proPic), 
+            authorN: authorName,
             date: new Date().toLocaleString() // Current date and time
         };
         addNewPost(newPost); // Call the addPost function to add the new post

@@ -1,0 +1,25 @@
+.comment-popup-window {
+    width:50rem;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px ;
+}
+
+
+.night-mode .comment-popup-window {
+    background-color: darkgray;
+}
+
+.night-mode .comment-container {
+    color: white;
+  }
+
+.comment-form textarea {
+    height: 20px !important; 
+  }
+
+  .comment-container {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
