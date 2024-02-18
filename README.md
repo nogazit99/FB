@@ -12,6 +12,14 @@ Foobar is a social networking application similar to Facebook, designed to conne
 
 - **Frontend:** The frontend of Foobar is built using modern web technologies such as HTML, CSS, and JavaScript. It utilizes frameworks like React.js for dynamic user interfaces and smooth interactions.
 
+## Dependencies
+
+- **Frontend:**
+  - React.js
+  - React Router
+  - Axios (for API requests)
+  - Bootstrap or another CSS framework for styling
+
 ## Getting Started
 
 To get started with Foobar, follow these steps:
@@ -22,15 +30,14 @@ To get started with Foobar, follow these steps:
 4. Start the backend server and frontend development server.
 5. Access Foobar in your web browser at the provided address.
 
-## Contributing
+## Work Process
 
-Contributions to Foobar are welcome! If you'd like to contribute new features, bug fixes, or improvements, please follow these steps:
+Our development process follows these steps:
 
-1. Fork the repository on GitHub.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them with clear, descriptive messages.
-4. Push your branch to your fork and open a pull request against the main repository.
+1. **Planning:** We start with brainstorming and defining the features and functionalities of Foobar.
+2. **Design:** Once the requirements are clear, we move to the design phase, where we create wireframes and UI/UX designs for the frontend.
+3. **Implementation:** With the designs in hand, we proceed to implement the frontend and backend components of Foobar, ensuring they meet the specified requirements.
+4. **Testing:** We rigorously test the application for bugs, usability issues, and performance optimizations.
+5. **Deployment:** Once testing is complete and Foobar meets our quality standards, we deploy it to production for public use.
 
-## License
 
-Foobar is licensed under the [MIT License](LICENSE), allowing for free use, modification, and distribution of the software.
