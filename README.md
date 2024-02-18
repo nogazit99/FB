@@ -20,7 +20,7 @@ Foobar is a social networking application similar to Facebook, designed to conne
   - Axios (for API requests)
   - Bootstrap or another CSS framework for styling
 
-## Getting Started
+## Running the code
 
 To get started with Foobar, follow these steps:
 
