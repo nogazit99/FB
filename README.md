@@ -1,20 +1,16 @@
 # Foobar
 
-Foobar is a social networking application similar to Facebook, designed to connect people and facilitate sharing of updates, photos, and interactions with friends and family.
+Foobar is a social networking application similar to Facebook, designed to connect people and support sharing of updates and photos.
 
 ## Features
 
 - **Sign Up and Login:** Foobar allows users to create accounts securely with a unique username and password. Users can then log in to access their account and use the app's features.
 
-- **Feed:** The heart of Foobar is its feed, where users can see updates, posts, and media shared by their friends and connections. The feed is customizable and tailored to each user's preferences, showing content from those they follow.
+- **Feed:** The heart of Foobar is its feed, where the user can see updates, posts, and media. 
 
 ## Technologies Used
 
 - **Frontend:** The frontend of Foobar is built using modern web technologies such as HTML, CSS, and JavaScript. It utilizes frameworks like React.js for dynamic user interfaces and smooth interactions.
-
-- **Backend:** The backend of Foobar is powered by a robust server-side architecture, possibly implemented using technologies like Node.js or Django. It handles user authentication, data storage, and retrieval, ensuring a seamless experience for users.
-
-- **Database:** Foobar relies on a database system to store user data, posts, and other information securely. Options for the database include MySQL, PostgreSQL, or MongoDB, depending on scalability and performance requirements.
 
 ## Getting Started
 
