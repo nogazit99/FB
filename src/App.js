@@ -1,22 +1,25 @@
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import LoginContainer from './LoginContainer/LoginContainer';
+import FeedContainer from './FeedContainer/FeedContainer';
+import SignUpContainer from './SignUpContainer/SignUpContainer';
 
 function App() {
+  const [usersData, setUsersData] = useState({});
+  const [username, setUsername] = useState('');
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          {/* Redirect to login page if the user is not logged in */}
+          {!username && <Route path="/feed" element={<Navigate to="/" />} />}
+          <Route path="/feed" element={<FeedContainer usersData={usersData} username={username} />} />
+          <Route path="/signup" element={<SignUpContainer  usersData={usersData} setUsersData={setUsersData} username={username} setUsername={setUsername} />} />
+          <Route path="/" element={<LoginContainer usersData={usersData} setUsersData={setUsersData} username={username} setUsername={setUsername} />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

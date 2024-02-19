@@ -1,0 +1,16 @@
+/* ConnectLeft.css */
+.logo,
+.logo * {
+    user-select: none; /* Prevent text selection */
+    display: flex;
+    width: 60%;
+    margin-top: -7rem;
+    align-items: center; /* Center the logo vertically */
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)); /* Apply a drop shadow effect */
+    transition: transform 0.3s ease; /* Add smooth transition effect */
+}
+
+/* Hover effect for the logo */
+.logo:hover {
+    transform: scale(1.1); /* Scale the logo slightly on hover */
+}

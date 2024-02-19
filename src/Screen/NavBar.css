@@ -1,0 +1,27 @@
+.navbar {
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 40px; /* Adjust this value based on your preference */
+    padding-bottom: 5px;
+}
+
+/* Rounded corners for larger screen input */
+.d-none.d-lg-block {
+    border-radius: 100px; 
+}
+  
+  /* Rounded corners for smaller screen input */
+.d-lg-none {
+    border-radius: 100px; 
+}
+
+.btn-secondary-outline:hover {
+    background-color: rgba(222, 217, 217, 0.676);
+}
+
+/* Styles for dark mode */
+.night-mode .navbar {
+    background-color: #454444; /* Dark background color */
+    box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1); /* Adjust shadow color for dark mode */
+    color: #ffffff; /* Light text color */
+}
