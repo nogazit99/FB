@@ -4,25 +4,26 @@ import ConnectRight from '../ConnectionPage/ConnectRight/ConnectRight';
 
 function LoginContainer({ usersData,setUsersData , setUsername }) {
     return (
-        <div className="container-fluid text-center  ">
+        <div className="container-fluid text-center bg-secondary-subtle">
              <div className="row">
                 <div className="col-12">
-                <header className="bg-primary text-white py-4" style={{ marginLeft: '-15px', marginRight: '-15px' }}> {/* Adjusted margin to pull header closer to the left edge */}
-                        <h1>Welcome to FooBar !</h1>
-                    </header>
+                <div className="header bg-primary bg-opacity-75 shadow p-3 text-white py-4 ">
+                        <h1 className="fw-bold"> Welcome to FooBar !</h1>
+                    </div>
                 </div>
             </div>
             
             <div className="row">
-                <div className="col">
+                <div className="col-6 ">
                     <ConnectLeft />
                 </div>
-                <div className="col">
+                <div className="col-6 ">
                     <ConnectRight formToShow="login" usersData={usersData} setUsersData={setUsersData} setUsername={setUsername} />
                 </div>
             </div>
         </div>
     );
 }
+
 
 export default LoginContainer;
