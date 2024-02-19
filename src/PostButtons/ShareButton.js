@@ -3,7 +3,7 @@ import './ButtonStyle.css'; // Import the CSS file
 
 const ShareButton = () => {
     return (
-        <div className="dropdown">
+        <div className="dropup">
             <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i className="bi bi-share"></i> Share
             </button>

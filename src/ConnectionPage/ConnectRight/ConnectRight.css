@@ -4,12 +4,7 @@
   margin-top: -10vh;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)); /* Apply a drop shadow effect */
-    transition: transform 0.3s ease; /* Add smooth transition effect */
+    /* transition: transform 0.3s ease; Add smooth transition effect */
 }
 
-
-  /* Hover effect for the card */
-  .card:hover {
-    transform: scale(1.1); /* Scale the logo slightly on hover */
-  }
   
