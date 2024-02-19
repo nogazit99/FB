@@ -17,27 +17,22 @@ Foobar is a social networking application similar to Facebook, designed to conne
 - **Frontend:**
   - React.js
   - React Router
-  - Axios (for API requests)
-  - Bootstrap or another CSS framework for styling
+  - Bootstrap 
 
 ## Running the code
 
 To get started with Foobar, follow these steps:
 
 1. Clone the repository to your local machine.
-2. Set up the backend server and database by following the instructions in the `backend/README.md` file.
-3. Set up the frontend environment by following the instructions in the `frontend/README.md` file.
-4. Start the backend server and frontend development server.
-5. Access Foobar in your web browser at the provided address.
+2. Navigate to your project directory.
+3. Install dependencies (if needed): If you haven't already installed the dependencies for your project, run npm install to install them. This command reads the package.json file in your project and installs all dependencies listed there.
+4. npm start
+5. Access the app: After running npm start, your React app should be running locally. You can access it by navigating to http://localhost:3000 in your web browser. This is the default address for the development server.
 
 ## Work Process
 
 Our development process follows these steps:
 
-1. **Planning:** We start with brainstorming and defining the features and functionalities of Foobar.
-2. **Design:** Once the requirements are clear, we move to the design phase, where we create wireframes and UI/UX designs for the frontend.
-3. **Implementation:** With the designs in hand, we proceed to implement the frontend and backend components of Foobar, ensuring they meet the specified requirements.
-4. **Testing:** We rigorously test the application for bugs, usability issues, and performance optimizations.
-5. **Deployment:** Once testing is complete and Foobar meets our quality standards, we deploy it to production for public use.
-
-
+1. **Planning:** We start with brainstorming and defining the features and functionalities of Foobar and then we put it onto Jira.
+2. **Design:** Once the requirements are clear, we move to the design phase.
+3. **Implementation:** With the designs in hand, we proceed to implement the frontend components of Foobar, ensuring they meet the specified requirements.
