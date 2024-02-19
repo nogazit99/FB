@@ -1,6 +1,7 @@
 // Navbar.js
 import './NavBar.css'; // Import the CSS file
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Popover } from 'bootstrap';
 
 
@@ -8,6 +9,8 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [isPopoverOpen, setIsPopoverOpen] = useState(false); // State for controlling popover visibility
     const [popoverContent, setPopoverContent] = useState(null); // State for popover content
+
+    const navigate = useNavigate();
 
     const toggleSearchVisibility = () => {
         setIsSearchVisible(!isSearchVisible);
@@ -25,32 +28,31 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
     }, []); // Empty dependency array ensures this effect runs only once after initial render
 
 
-    const togglePopover = () => {
-        setIsPopoverOpen(!isPopoverOpen);
-        if (!isPopoverOpen) {
-            // Construct the content of the popover
-            const content = (
-                <div className="popover-container">
-                    <div className="popover-content">
-                        <img
-                            src={URL.createObjectURL(userProfilePicture)}
-                            alt="Profile Image"
-                            className="rounded-circle profile-image"
-                            style={{ width: '80px', height: '80px' }}
-                        />
-                        <p>userDisplayName</p> {/* Replace with actual profile name */}
-                    </div>
-                </div>
-            );
-            setPopoverContent(content);
-        } else {
-            setPopoverContent(null);
-        }
-    };
+    // const togglePopover = () => {
+    //     setIsPopoverOpen(!isPopoverOpen);
+    //     if (!isPopoverOpen) {
+    //         // Construct the content of the popover
+    //         const content = (
+    //             <div className="popover-container">
+    //                 <div className="popover-content">
+    //                     <img
+    //                         src={URL.createObjectURL(userProfilePicture)}
+    //                         alt="Profile Image"
+    //                         className="rounded-circle profile-image"
+    //                         style={{ width: '80px', height: '80px' }}
+    //                     />
+    //                     <p>userDisplayName</p> {/* Replace with actual profile name */}
+    //                 </div>
+    //             </div>
+    //         );
+    //         setPopoverContent(content);
+    //     } else {
+    //         setPopoverContent(null);
+    //     }
+    // };
 
     const handleLogout = () => {
-        // Perform logout actions here, such as clearing session/local storage, etc.
-        // Then redirect to the login page
+        navigate('/');
     };
 
     return (
@@ -78,8 +80,8 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
                     <button
                         type="button"
                         className="btn btn-secondary-outline"
-                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="John Doe"
-                        onClick={togglePopover} // Toggle popover
+                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content={userDisplayName}
+                        //onClick={togglePopover} // Toggle popover
                     >
                         <img
                             src={URL.createObjectURL(userProfilePicture)}
@@ -88,9 +90,6 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
                         />
                     </button>
                     
-                    {/* Popover */}
-                    {popoverContent}
-
                     {/* Toggle button */}
                     <button
                         type="button"
