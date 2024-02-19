@@ -13,6 +13,9 @@ function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onE
 
     const [editing, setEditing] = useState(false);
 
+     const [editedText, setEditedText] = useState(text); // Define editedText
+     const [editedPicture, setEditedPicture] = useState(picture); // Define editedPicture
+
     const handleEditClick = () => {
         setEditing(true);
     };
@@ -21,9 +24,19 @@ function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onE
         setEditing(false);
     };
 
-    const handleSaveEdit = (editedText) => {
-        onEditPost(id, editedText); // Call the onEditPost function with the id and edited content
+    const handleSaveEdit = () => {
+        onSaveText(editedText); // Save edited text
+        onSavePicture(editedPicture); // Save edited picture
         setEditing(false);
+    };
+    
+    const onSaveText = (editedText) => {
+        // Implement logic to save edited text
+        onEditPost(id, editedText);
+    };
+    
+    const onSavePicture = (editedPicture) => {
+        setEditedPicture(editedPicture); // Update the picture in the state
     };
 
 
@@ -81,9 +94,11 @@ function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onE
                                 <EditPostForm
                                     id={id}
                                     initialText={text}
+                                    initialPicture={picture} // Pass the initial picture URL
                                     onSave={handleSaveEdit}
                                     onCancel={handleCancelEdit}
                                     onEditPost={onEditPost} // Pass down the onEditPost function
+                                    onSavePicture={onSavePicture}
                                 />
                             ) : (
                             
