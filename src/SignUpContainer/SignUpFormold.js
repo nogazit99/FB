@@ -49,13 +49,6 @@ function SignupForm({ onSignup, usersData }) {
         const reader = new FileReader();
         reader.onload = (e) => {
             const imageSrc = e.target.result;
-            const base64String = e.target.result;
-
-            setFormData({
-                ...formData,
-                profilePicture: base64String
-            });
-
             // Set the image source directly
             const previewImg = document.getElementById('profilePicturePreview');
             previewImg.src = imageSrc;
@@ -64,11 +57,11 @@ function SignupForm({ onSignup, usersData }) {
     };
 
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         let errors = {};
 
-        
+
         // username validation:
         if (!/^[a-zA-Z]/.test(formData.username)) {
             errors.username = 'Username must start with a letter';
@@ -99,48 +92,30 @@ function SignupForm({ onSignup, usersData }) {
             errors.profilePicture = 'Profile Picture is required';
         }
 
+
+        setFormErrors(errors);
+
+
         // If there are no errors, proceed with form submission
         if (Object.keys(errors).length === 0) {
-            try {
-                const formDataToSend = {
-                    username: formData.username,
-                    password: formData.password,
-                    displayName: formData.displayName,
-                    profilePic: formData.profilePicture // Assuming formData.profilePicture is a base64 encoded string
-                };
-    
-                const response = await fetch('http://localhost:12345/api/users', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formDataToSend)
-                });
 
-                if (response.ok) { 
-                    const userData = await response.json(); 
-                    console.log('User signed up:', userData); 
+            onSignup(formData);
+            console.log('User signed up:', formData);
+            // Clear form data after successful registration
+            // Clear form data after successful registration
+            setFormData({
+                username: '',
+                password: '',
+                confirmPassword: '',
+                displayName: '',
+                profilePicture: null
+            });
+            setSignupSuccess(true);
+            // Redirect to login page after successful signup
+            navigate('/', { state: { successMessage: 'Signup successful! You can now login.' } });
+        };
+    }
 
-                    // Handle authentication and JWT token retrieval...
-                    // Assuming you have a function to handle authentication and store JWT token
-
-                    // Redirect to login page after successful signup
-                    setSignupSuccess(true);
-                    navigate('/', { state: { successMessage: 'Signup successful! You can now login.' } });
-                } else {
-                    const errorData = await response.json();
-                    console.error('Error signing up:', errorData);
-                    
-                    // Handle signup error...
-                }
-            } catch (error) {
-                console.error('Error signing up:', error);
-                // Handle signup error...
-            }
-        } else {
-            setFormErrors(errors);
-        }
-    };
 
 
     return (

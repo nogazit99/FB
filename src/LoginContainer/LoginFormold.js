@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './LoginForm.css';
 
 
-function LoginForm({ onLogin, usersData  }) {
+function LoginForm({ onLogin,usersData  }) {
 
     
 
@@ -26,47 +26,34 @@ function LoginForm({ onLogin, usersData  }) {
     };
 
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         let errors = {};
-    
-        try {
-            const response = await fetch('http://localhost:12345/api/tokens', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: formData.username,
-                    password: formData.password
-                })
-            });
-    
-            if (response.ok) {
-                const tokenData = await response.json();
-                // Assuming tokenData contains the JWT token
-                const token = tokenData.token;
-    
-                // Pass the token forward to upper classes
-                onLogin(formData.username, token);
-                console.log('User logged in:', formData.username);
-                // After successful login
-            } else {
-                const errorData = await response.json();
-                // Handle login error
-                console.error('Error logging in:', errorData);
-                errors.password = 'Invalid username or password';
+
+        console.log("users: ",usersData );
+         
+        if (!usersData[formData.username]) {
+            errors.username = 'Invalid username'
+        } else {
+            // Retrieve the user object from usersData
+            const user = usersData[formData.username];
+            // Check if the password matches
+            if (user.password !== formData.password) {
+                errors.password = 'Invalid password';
             }
-        } catch (error) {
-            console.error('Error logging in:', error);
-            // Handle login error
-            errors.password = 'An error occurred while logging in';
         }
     
         setFormErrors(errors);
-    };
-    
 
+        // If there are no errors, proceed with form submission
+        if (Object.keys(errors).length === 0) {
+            onLogin(formData.username);
+            console.log('User logged in:', formData.username);
+            // After successful login
+        }
+
+
+    };
 
     return (
         <form onSubmit={handleSubmit}>

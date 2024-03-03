@@ -19,7 +19,7 @@ function SignUpContainer({ usersData, setUsersData, setUsername }) {
                         <ConnectLeft />
                     </div>
                     <div className="col-6">
-                        <ConnectRight formToShow="signup" usersData={usersData} setUsersData={setUsersData} setUsername={setUsername} />
+                        <ConnectRight formToShow="signup" usersData={usersData} setUsersData={setUsersData} setUsername={setUsername}  />
                     </div>
                 </div>
             </div>

@@ -27,30 +27,6 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
         };
     }, []); // Empty dependency array ensures this effect runs only once after initial render
 
-
-    // const togglePopover = () => {
-    //     setIsPopoverOpen(!isPopoverOpen);
-    //     if (!isPopoverOpen) {
-    //         // Construct the content of the popover
-    //         const content = (
-    //             <div className="popover-container">
-    //                 <div className="popover-content">
-    //                     <img
-    //                         src={URL.createObjectURL(userProfilePicture)}
-    //                         alt="Profile Image"
-    //                         className="rounded-circle profile-image"
-    //                         style={{ width: '80px', height: '80px' }}
-    //                     />
-    //                     <p>userDisplayName</p> {/* Replace with actual profile name */}
-    //                 </div>
-    //             </div>
-    //         );
-    //         setPopoverContent(content);
-    //     } else {
-    //         setPopoverContent(null);
-    //     }
-    // };
-
     const handleLogout = () => {
         navigate('/');
     };

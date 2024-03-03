@@ -5,7 +5,7 @@ import SignupForm from '../../SignUpContainer/SignUpForm';
 import './ConnectRight.css';
 
 
-function ConnectRight({ formToShow, usersData, setUsersData,setUsername  }) {
+function ConnectRight({ formToShow, usersData, setUsersData, setUsername, setToken  }) {
 
     const navigate = useNavigate();
    
@@ -30,11 +30,37 @@ function ConnectRight({ formToShow, usersData, setUsersData,setUsername  }) {
       };
       
 
-    const handleLogin= (newUsername) => {
-         // Set username in the App component's state
-         setUsername(newUsername);
-        navigate('/feed');   
-      };
+    const handleLogin = async (newUsername, token) => {
+        // Set username and token in the App component's state
+        setUsername(newUsername);
+        setToken(token);
+
+        try {
+            // Make a GET request to fetch user details using the provided token
+            const response = await fetch(`http://localhost:12345/api/users/${newUsername}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+    
+            if (response.ok) {
+                // If the request is successful, parse the response
+                const userData = await response.json();
+                localStorage.setItem('userData', JSON.stringify(userData));
+                console.log('User details:', userData);
+            } else {
+                // Handle error if the request fails
+                console.error('Error fetching user details:', response.statusText);
+            }
+        } catch (error) {
+            // Handle any other errors that may occur during the request
+            console.error('Error fetching user details:', error.message);
+        }
+        // Navigate to the feed or any other authenticated route
+        navigate('/feed');
+    };
+    
 
 
     return (
