@@ -5,7 +5,7 @@ import SignupForm from '../../SignUpContainer/SignUpForm';
 import './ConnectRight.css';
 
 
-function ConnectRight({ formToShow, usersData, setUsersData, setUsername, setToken  }) {
+function ConnectRight({ formToShow, setUsername, setToken  }) {
 
     const navigate = useNavigate();
    
@@ -13,10 +13,9 @@ function ConnectRight({ formToShow, usersData, setUsersData, setUsername, setTok
     const renderForm = () => {
         switch (formToShow) {
             case 'login':
-                console.log('Sent to login from ConnectRight:', usersData);
-                return <LoginForm onLogin={handleLogin} usersData={usersData }  />;
+                return <LoginForm onLogin={handleLogin} />;
             case 'signup':
-                return <SignupForm onSignup={handleSignup} usersData={usersData }  />;
+                return <SignupForm onSignup={handleSignup} />;
             default:
                 return null;
         }
@@ -24,9 +23,9 @@ function ConnectRight({ formToShow, usersData, setUsersData, setUsername, setTok
 
 
     const handleSignup = (userData) => {
-        setUsersData(prevUsersData => {
-          return { ...prevUsersData, [userData.username]: userData };
-        });
+        // setUsersData(prevUsersData => {
+        //   return { ...prevUsersData, [userData.username]: userData };
+        // });
       };
       
 

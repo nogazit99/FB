@@ -1,10 +1,10 @@
 // SignupForm.js
 import React, { useState } from 'react';
 import { Link ,useNavigate  } from 'react-router-dom';
-
+import { resizeFile } from 'react-image-file-resizer';
 import './SignUpForm.css';
 
-function SignupForm({ onSignup, usersData }) {
+function SignupForm({ onSignup }) {
 
     // eslint-disable-next-line no-restricted-globals
     const navigate = useNavigate();
@@ -40,6 +40,7 @@ function SignupForm({ onSignup, usersData }) {
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
+
         setFormData({
             ...formData,
             profilePicture: file
@@ -83,10 +84,10 @@ function SignupForm({ onSignup, usersData }) {
         }
 
 
-        // Check if the username is already taken
-        if (usersData[formData.username]) {
-            errors.username = 'Username already exists';
-        }
+        // // Check if the username is already taken
+        // if (usersData[formData.username]) {
+        //     errors.username = 'Username already exists';
+        // }
 
 
         // Additional validation logic, e.g., password match
@@ -120,9 +121,6 @@ function SignupForm({ onSignup, usersData }) {
                 if (response.ok) { 
                     const userData = await response.json(); 
                     console.log('User signed up:', userData); 
-
-                    // Handle authentication and JWT token retrieval...
-                    // Assuming you have a function to handle authentication and store JWT token
 
                     // Redirect to login page after successful signup
                     setSignupSuccess(true);

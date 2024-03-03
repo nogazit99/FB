@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './LoginForm.css';
 
 
-function LoginForm({ onLogin, usersData  }) {
-
-    
-
+function LoginForm({ onLogin }) {
     const [formData, setFormData] = useState({
         username: '',
         password: ''

@@ -9,6 +9,7 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [isPopoverOpen, setIsPopoverOpen] = useState(false); // State for controlling popover visibility
     const [popoverContent, setPopoverContent] = useState(null); // State for popover content
+    const [userData, setUserData] = useState(null); // State for user data
 
     const navigate = useNavigate();
 
@@ -27,7 +28,16 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
         };
     }, []); // Empty dependency array ensures this effect runs only once after initial render
 
+    useEffect(() => {
+        // Fetch user data from local storage when component mounts
+        const storedUserData = localStorage.getItem('userData');
+        if (storedUserData) {
+            setUserData(JSON.parse(storedUserData));
+        }
+    }, []);
+
     const handleLogout = () => {
+        localStorage.removeItem('userData');
         navigate('/');
     };
 
@@ -53,18 +63,19 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
                 {/* Wrapper div for profile picture and toggle button */}
                 <div className="d-flex align-items-center">
                     {/* Profile Picture Button */}
-                    <button
-                        type="button"
-                        className="btn btn-secondary-outline"
-                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content={userDisplayName}
-                        //onClick={togglePopover} // Toggle popover
-                    >
-                        <img
-                            src={URL.createObjectURL(userProfilePicture)}
-                            alt="Profile Image"
-                            className="rounded-circle profile-image"
-                        />
-                    </button>
+                    {userData && (
+                        <button
+                            type="button"
+                            className="btn btn-secondary-outline"
+                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content={userDisplayName}
+                        >
+                            <img
+                                src={userProfilePicture}
+                                alt="Profile Image"
+                                className="rounded-circle profile-image"
+                            />
+                        </button>
+                    )}
                     
                     {/* Toggle button */}
                     <button

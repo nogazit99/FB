@@ -2,7 +2,7 @@ import React from 'react';
 import ConnectLeft from '../ConnectionPage/ConnectLeft';
 import ConnectRight from '../ConnectionPage/ConnectRight/ConnectRight';
 
-function LoginContainer({ usersData,setUsersData , setUsername, setToken }) {
+function LoginContainer({ setUsername, setToken }) {
     return (
         <div className="container-fluid text-center bg-secondary-subtle">
              <div className="row">
@@ -18,7 +18,7 @@ function LoginContainer({ usersData,setUsersData , setUsername, setToken }) {
                     <ConnectLeft />
                 </div>
                 <div className="col-6 ">
-                    <ConnectRight formToShow="login" usersData={usersData} setUsersData={setUsersData} setUsername={setUsername} setToken={setToken} />
+                    <ConnectRight formToShow="login" setUsername={setUsername} setToken={setToken} />
                 </div>
             </div>
         </div>
