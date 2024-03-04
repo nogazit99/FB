@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import EditProfilePopup from './EditProfilePopup';
 
-const Profile = () => {
+const Profile = ({ token }) => {
     const [userData, setUserData] = useState(null);
     const [showEditContainer, setShowEditContainer] = useState(false);
+    const [userId, setUserId] = useState(null);
     const [editedUserData, setEditedUserData] = useState({});
 
     useEffect(() => {
@@ -14,20 +15,32 @@ const Profile = () => {
         }
     }, []);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setEditedUserData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
+    useEffect(() => {
+        if (userData) {
+            setUserId(userData.username);
+        }
+    }, [userData]);
 
-    const saveChanges = (field) => {
-        console.log(`Saving changes for ${field}:`, editedUserData[field]);
-        setEditedUserData((prevData) => ({
-            ...prevData,
-            [field]: '',
-        }));
+    const saveChanges = async (field) => {
+        try {
+            const fieldValue = editedUserData[field];
+            const response = await fetch(`http://localhost:12345/api/users/${userId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify({
+                    [field]: fieldValue,
+                }),
+            });
+            if (!response.ok) {
+                throw new Error('Failed to save changes');
+            }
+            console.log(`Changes saved successfully for ${field}`);
+        } catch (error) {
+            console.error('Error saving changes:', error.message);
+        }
     };
 
     const closeEditContainer = () => {
@@ -74,9 +87,8 @@ const Profile = () => {
             {showEditContainer && <EditProfilePopup
                 handleClose={closeEditContainer}
                 handleSave={saveChanges}
-                editedUserData={editedUserData}
-                handleInputChange={handleInputChange}
-                disabledFields={Object.keys(editedUserData).filter(field => !editedUserData[field])}
+                editedUserData={editedUserData} // Pass editedUserData to EditProfilePopup
+                setEditedUserData={setEditedUserData} // Pass setEditedUserData to EditProfilePopup
             />}
         </div>
     );
