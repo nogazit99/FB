@@ -2,6 +2,7 @@ import React from 'react';
 import PostItem from '../Post/PostItem';
 
 const Feed = ({ posts, onDeletePost, onEditPost }) => {
+  console.log("in feed");
   const PostsList = posts.map((post) => {
     return <PostItem 
               {...post} 

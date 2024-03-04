@@ -7,8 +7,6 @@ import { Popover } from 'bootstrap';
 
 const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayName }) => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
-    const [isPopoverOpen, setIsPopoverOpen] = useState(false); // State for controlling popover visibility
-    const [popoverContent, setPopoverContent] = useState(null); // State for popover content
     const [userData, setUserData] = useState(null); // State for user data
 
     const navigate = useNavigate();
@@ -41,6 +39,10 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
         navigate('/');
     };
 
+    const navigateToProfile = () => {
+        navigate('/profile'); // Change '/profile' to the actual route of your profile page
+    };
+
     return (
         <nav className="navbar navbar-expand-lg sticky-top">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
@@ -67,7 +69,7 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
                         <button
                             type="button"
                             className="btn btn-secondary-outline"
-                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content={userDisplayName}
+                            onClick={navigateToProfile}
                         >
                             <img
                                 src={userProfilePicture}

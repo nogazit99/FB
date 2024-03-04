@@ -2,30 +2,81 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../Screen/NavBar';
 import Menu from '../Screen/Menu';
 import ThinkBox from '../Screen/ThinkBox';
-import Posts from '../Post/Posts';
 import AddPost from '../Post/Add/AddPost';
 import Feed from '../Screen/Feed';
 import PostItem from '../Post/PostItem';
-import EditPost from '../Post/Edit/EditPost'; // Import the EditPost component
 import '../Screen/style.css'; // Import your CSS file
 
-function FeedContainer() {
+function FeedContainer({ token }) {
 
     const [userData, setUserData] = useState(null);
     const [postIdCounter, setPostIdCounter] = useState(11); // Initialize the counter with a unique value
-
-    const [posts, setPosts] = useState(Posts); // State to manage the list of posts
+    const [posts, setPosts] = useState([]); // State to manage the list of posts
     const [nightMode, setNightMode] = useState(false); // State to track night mode
 
+    // // Effect to fetch user data when component mounts
+    // useEffect(() => {
+    //   const fetchPosts = async () => {
+    //     // Check if user data exists in local storage
+    //     const storedUserData = localStorage.getItem('userData');
+    //     if (storedUserData) {
+    //         setUserData(JSON.parse(storedUserData));
+    //     }
 
-    // Effect to fetch user data when component mounts
-    useEffect(() => {
-        // Check if user data exists in local storage
-        const storedUserData = localStorage.getItem('userData');
-        if (storedUserData) {
-            setUserData(JSON.parse(storedUserData));
+    //         // Fetch posts for the current user
+    //     if (token && userData) { // Check if userData exists
+    //       const username = userData.username; 
+    //       try {
+    //           const response = await fetch(`http://localhost:12345/api/posts?username=${username}`, {
+    //               method: 'GET',
+    //               headers: {
+    //                   'Authorization': `Bearer ${token}`
+    //               }
+    //           });
+    //           const postData = await response.json();
+    //           console.log("Got Posts");
+    //           setPosts(postData);
+    //       } catch (error) {
+    //           console.error('Error fetching posts:', error);
+    //       }
+    //   }
+    // };
+    //     // Call the asynchronous function
+    //     fetchPosts();
+    //   }, [token, userData]); // Include userData in the dependencies array
+
+
+      useEffect(() => {
+        // Fetch posts for the current user
+          const storedUserData = localStorage.getItem('userData');
+             if (storedUserData) {
+               setUserData(JSON.parse(storedUserData));
         }
-    }, []);
+        if (token) {
+          const fetchPosts = async () => {
+              try {
+                  const response = await fetch(`http://localhost:12345/api/posts`, {
+                      method: 'GET',
+                      headers: {
+                          'Authorization': `Bearer ${token}`
+                      }
+                  });
+                  if (response.ok) {
+                    const postData = await response.json();
+                    console.log("Got Posts", postData);
+                    setPosts(postData);
+                  } else {
+                    console.error('Error fetching posts:', response.statusText);
+                  }
+                } catch (error) {
+                  console.error('Error fetching posts:', error);
+                }
+          };
+
+          fetchPosts();
+      }
+  }, [token]);
+    
   
     // Function to add a new post to the list
     const addNewPost = (newPost) => {

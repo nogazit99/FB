@@ -1,7 +1,18 @@
 /* style.css */
 .profile-container {
     background-color: #ffffff; /* White background */
+    width: 100% !important; /* You can adjust the width as needed */
+    height: 200px; /* Set the desired height */
+    max-width: none;
+    
 }
+
+body {
+    width: 100%;
+    margin: 0; /* Reset default margins */
+    padding: 0; /* Reset default padding */
+}
+
 
 .profile-picture {
     width: 150px; /* Adjust size as needed */
