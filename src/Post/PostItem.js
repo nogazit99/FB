@@ -5,6 +5,7 @@ import CommentButton from '../PostButtons/Comment/CommentButton';
 import Comment from '../PostButtons/Comment/Comment';
 import CommentPopUp from '../PostButtons/Comment/CommentPopUp';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import EditPost from './Edit/EditPost';
 import EditPostForm from './Edit/EditPostForm'; // Import the EditPostForm component
 import DeletePost from './Delete/DeletePost';
@@ -84,8 +85,10 @@ function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onE
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
                 <div className="card-header d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center justify-content-center">
+                    <Link to={`/profile/${authorN}`} className="author-link">    
                         <img src={authorP} className="rounded-circle me-2" alt="Author" style={{ width: '40px', height: '40px' }} />
                         <span className="author-name">{authorN}</span>
+                    </Link>
                     </div>
                     <div className="d-flex align-items-between">
                         {/* Edit and Delete buttons */}

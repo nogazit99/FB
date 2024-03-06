@@ -40,7 +40,7 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
     };
 
     const navigateToProfile = () => {
-        navigate('/profile'); // Change '/profile' to the actual route of your profile page
+        navigate('/profile'); 
     };
 
     return (

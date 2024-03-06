@@ -7,16 +7,16 @@ const Menu = ({ proPic, displayName }) => {
 
     const navigate = useNavigate(); // Initialize navigate
 
-    const handleClick = () => {
+    const navigateToProfile = () => {
         //console.log("Before navigation - proPic:", proPic, "displayName:", displayName);
-        navigate("/profile", { state: { proPic, displayName } });
+        navigate("/profile");
     };
 
     return (
         <div className="menu-container">
         <ul class="list-group">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
-            <li className="list-group-item" onClick={handleClick}>
+            <li className="list-group-item" onClick={navigateToProfile}>
                 <img
                     src={proPic}
                     alt="Profile Image"
