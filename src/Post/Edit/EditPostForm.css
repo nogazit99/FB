@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999; /* Ensure the pop-up is in front */
+    z-index: 9999; /* Ensure the pop-up is in front */
 }
 
 .popup-content {

@@ -2,7 +2,7 @@
 import './EditPostForm.css'
 import React, { useState, useEffect, useRef } from 'react';
 
-const EditPostForm = ({ id, initialText, initialPicture, onSave, onCancel, onEditPost, onSavePicture }) => {
+const EditPostForm = ({ initialText, initialPicture, onSave, onCancel, onEditPost, onSavePicture }) => {
   const [editedText, setEditedText] = useState(initialText);
   const [editedPicture, setEditedPicture] = useState(initialPicture);
   const textAreaRef = useRef(null);
@@ -25,8 +25,8 @@ const EditPostForm = ({ id, initialText, initialPicture, onSave, onCancel, onEdi
   };
 
   const handleSave = () => {
-    onSave(id, editedText, editedPicture); // Call onSave with the id, editedText, and editedPicture
-    onEditPost(id, editedText, editedPicture); // Call onEditPost with the id, editedText, and editedPicture
+    onSave(editedText, editedPicture); // Call onSave with the id, editedText, and editedPicture
+    onEditPost(editedText, editedPicture); // Call onEditPost with the id, editedText, and editedPicture
     onSavePicture(editedPicture); // Call onSavePicture with the editedPicture
   };
 

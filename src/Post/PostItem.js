@@ -10,12 +10,15 @@ import EditPost from './Edit/EditPost';
 import EditPostForm from './Edit/EditPostForm'; // Import the EditPostForm component
 import DeletePost from './Delete/DeletePost';
 
-function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onEditPost }) {
+function PostItem({ _id, text, picture, authorP, authorN, date, onDeletePost, onEditPost }) {
 
     const [editing, setEditing] = useState(false);
-
+    const [liked, setLiked] = useState(false);
      const [editedText, setEditedText] = useState(text); // Define editedText
      const [editedPicture, setEditedPicture] = useState(picture); // Define editedPicture
+     const [showComments, setShowComments] = useState(false);
+     const [comments, setComments] = useState([]);
+
 
     const handleEditClick = () => {
         setEditing(true);
@@ -33,16 +36,12 @@ function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onE
     
     const onSaveText = (editedText) => {
         // Implement logic to save edited text
-        onEditPost(id, editedText);
+        onEditPost(_id, 'text', editedText);
     };
     
     const onSavePicture = (editedPicture) => {
-        setEditedPicture(editedPicture); // Update the picture in the state
+        onEditPost(_id, 'picture', editedPicture);; // Update the picture in the state
     };
-
-
-    const [showComments, setShowComments] = useState(false);
-    const [comments, setComments] = useState([]);
 
     const toggleComments = () => {
         setShowComments(!showComments);
@@ -69,14 +68,13 @@ function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onE
         }));
     };
 
-    const [liked, setLiked] = useState(false);
 
     const handleLikeClick = () => {
         setLiked(!liked);
     };
 
     const handleDeleteClick = () => {
-        onDeletePost(id); // Call the onDeletePost function with the id of the post to delete
+        onDeletePost(_id); // Call the onDeletePost function with the id of the post to delete
     };
 
     return (
@@ -95,7 +93,6 @@ function PostItem({ id, text, picture, authorP, authorN, date, onDeletePost, onE
                         <div className="d-flex align-items-between">
                             {editing ? (
                                 <EditPostForm
-                                    id={id}
                                     initialText={text}
                                     initialPicture={picture} // Pass the initial picture URL
                                     onSave={handleSaveEdit}

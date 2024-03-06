@@ -227,3 +227,37 @@ const Profile = ({ token }) => {
 };
 
 export default Profile;
+
+
+
+
+  // // Effect to fetch user data when component mounts
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     // Check if user data exists in local storage
+  //     const storedUserData = localStorage.getItem('userData');
+  //     if (storedUserData) {
+  //         setUserData(JSON.parse(storedUserData));
+  //     }
+
+  //         // Fetch posts for the current user
+  //     if (token && userData) { // Check if userData exists
+  //       const username = userData.username; 
+  //       try {
+  //           const response = await fetch(`http://localhost:12345/api/posts?username=${username}`, {
+  //               method: 'GET',
+  //               headers: {
+  //                   'Authorization': `Bearer ${token}`
+  //               }
+  //           });
+  //           const postData = await response.json();
+  //           console.log("Got Posts");
+  //           setPosts(postData);
+  //       } catch (error) {
+  //           console.error('Error fetching posts:', error);
+  //       }
+  //   }
+  // };
+  //     // Call the asynchronous function
+  //     fetchPosts();
+  //   }, [token, userData]); // Include userData in the dependencies array
