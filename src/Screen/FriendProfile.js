@@ -18,6 +18,7 @@ const FriendProfile = ({ username, token }) => {
         fetchUserData(username, token)
             .then(data => setFriendData(data))
             .catch(error => console.error('Error fetching friend data:', error));
+            console.log("fetched friend data");
 
         // Fetch friend's posts when the component mounts
         fetchUserPosts(username, token)

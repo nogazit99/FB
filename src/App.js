@@ -28,7 +28,7 @@ function App() {
           {!username && <Route path="/feed" element={<Navigate to="/" />} />}
           <Route path="/feed" element={<FeedContainer token={token}/>} />
           <Route path="/signup" element={<SignUpContainer setUsername={setUsername} />} />
-          <Route path="/profile" element={<Profile token={token}/>} />
+          <Route path="/profile/*" element={<Profile token={token}/>} />
           <Route path="/" element={<LoginContainer setUsername={setUsername} setToken={setToken}/>} />
         </Routes>
       </BrowserRouter>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Popover } from 'bootstrap';
 
 
-const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayName }) => {
+const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, username }) => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [userData, setUserData] = useState(null); // State for user data
 
@@ -40,7 +40,11 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, userDisplayNam
     };
 
     const navigateToProfile = () => {
-        navigate('/profile'); 
+        if (userData) {
+            const profileUrl = `/profile/${userData.username}`; // Construct the profile URL with the username parameter
+            navigate(profileUrl); // Navigate to the profile page with the username parameter in the URL
+        }
+        //navigate('/profile'); 
     };
 
     return (

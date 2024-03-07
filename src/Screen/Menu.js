@@ -3,13 +3,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Menu.css'; // Import the CSS file
 
-const Menu = ({ proPic, displayName }) => {
+const Menu = ({ proPic, username }) => {
 
     const navigate = useNavigate(); // Initialize navigate
 
     const navigateToProfile = () => {
         //console.log("Before navigation - proPic:", proPic, "displayName:", displayName);
-        navigate("/profile");
+        navigate(`/profile/${username}`)
     };
 
     return (
