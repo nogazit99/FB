@@ -29,20 +29,24 @@ const UserProfile = ({ token }) => {
                 .then(posts => setUserPosts(posts))
                 .catch(error => console.error('Error fetching user posts:', error));
             
-            fetchFriendsList(userData.username, token, handleFriendsListSuccess, handleFriendsListError);        
+
+            fetchFriendsList(userData.username, token)
+                .then(friends => setFriendsList(friends))
+                .catch(error => console.error('Error fetching friends list:', error));
+            //fetchFriendsList(userData.username, token, handleFriendsListSuccess, handleFriendsListError);        
             console.log(userData.username + " " + userData.id);
         }
     }, [userData, token]);
 
-    // Define the onSuccess and onError callbacks for fetching friends list
-    const handleFriendsListSuccess = (friendsData) => {
-        setFriendsList(friendsData);
-    };
+    // // Define the onSuccess and onError callbacks for fetching friends list
+    // const handleFriendsListSuccess = (friendsData) => {
+    //     setFriendsList(friendsData);
+    // };
 
-    const handleFriendsListError = (error) => {
-        console.error('Error fetching friends list:', error);
-        // Handle error display or logging here
-    };
+    // const handleFriendsListError = (error) => {
+    //     console.error('Error fetching friends list:', error);
+    //     // Handle error display or logging here
+    // };
     
     const openEditContainer = () => {
         setShowEditContainer(true);
@@ -54,6 +58,7 @@ const UserProfile = ({ token }) => {
 
     const handleOpenFriendList = () => {
         setShowFriendList(true);
+        console.log("setShowFriendList: true");
     };
 
     const handleCloseFriendList = () => {
@@ -83,6 +88,7 @@ const UserProfile = ({ token }) => {
 
     return (
         <div className="container mt-4">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             {/* Profile header */}
             <div className="row justify-content-center">
                 <div className="col-md-8">

@@ -69,7 +69,7 @@ export const fetchUserData = async (userId, token) => {
     }
 
 
-export const fetchFriendsList = async (userId, token, handleFriendsListSuccess) => {
+export const fetchFriendsList = async (userId, token) => {
     try {
         const response = await fetch(`http://localhost:12345/api/users/${userId}/friends`, {
             method: 'GET',
@@ -79,7 +79,8 @@ export const fetchFriendsList = async (userId, token, handleFriendsListSuccess) 
         });
         if (response.ok) {
             const friendsData = await response.json();
-            handleFriendsListSuccess(friendsData);
+            return friendsData.friends;
+            //handleFriendsListSuccess(friendsArray);
         } else {
             console.error('Failed to fetch friends list:', response.statusText);
         }
