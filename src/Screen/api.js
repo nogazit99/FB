@@ -90,4 +90,31 @@ export const fetchFriendsList = async (userId, token) => {
     }
 };
 
+// api.js
+
+export const deleteUserProfile = async (userId, token) => {
+    const url = `http://localhost:12345/api/users/${userId}`;
+    
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to delete user profile');
+        }
+
+        // If the response is successful, return null
+        return null;
+    } catch (error) {
+        // If there's an error, throw it
+        throw new Error(`Error deleting user profile: ${error.message}`);
+    }
+};
+
+
 

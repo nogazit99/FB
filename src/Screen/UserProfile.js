@@ -5,7 +5,7 @@ import Feed from './Feed';
 import EditProfilePopup from './EditProfilePopup';
 import FriendListPopup from './FriendList'; // Import the FriendListPopup component
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchUserPosts, fetchFriendsList, saveChanges } from './api';
+import { fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from './api';
 
 const UserProfile = ({ token }) => {
     const [userData, setUserData] = useState(null);
@@ -83,6 +83,17 @@ const UserProfile = ({ token }) => {
         }
     };
 
+    const deleteProfile = async () => {
+        try {
+            await deleteUserProfile(userData.username, token);
+            // If the delete request succeeds, navigate back to the feed page
+            navigate('/feed');
+        } catch (error) {
+            console.error('Error deleting profile:', error.message);
+            // Handle error display or logging here
+        }
+    };
+
     if (!userData) {
         return <div>Loading...</div>;
     }
@@ -114,6 +125,9 @@ const UserProfile = ({ token }) => {
                         </button>
                         <button className="btn btn-outline-secondary btn-sm btn-edit" onClick={handleOpenFriendList}>
                             <i className="bi bi-people-fill"></i>View Friends
+                        </button>
+                        <button className="btn btn-outline-secondary btn-sm btn-edit" onClick={deleteProfile}>
+                            <i className="bi bi-trash"></i>Delete Profile
                         </button>
                     </div>
                 </div>
