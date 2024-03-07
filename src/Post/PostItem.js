@@ -10,14 +10,15 @@ import EditPost from './Edit/EditPost';
 import EditPostForm from './Edit/EditPostForm'; // Import the EditPostForm component
 import DeletePost from './Delete/DeletePost';
 
-function PostItem({ _id, text, picture, authorP, authorN, date, onDeletePost, onEditPost }) {
+function PostItem({ _id, text, picture, authorP, authorN, date, username, onDeletePost, onEditPost }) {
 
     const [editing, setEditing] = useState(false);
     const [liked, setLiked] = useState(false);
-     const [editedText, setEditedText] = useState(text); // Define editedText
-     const [editedPicture, setEditedPicture] = useState(picture); // Define editedPicture
-     const [showComments, setShowComments] = useState(false);
-     const [comments, setComments] = useState([]);
+    const [editedText, setEditedText] = useState(text); // Define editedText
+    const [editedPicture, setEditedPicture] = useState(picture); // Define editedPicture
+    const [showComments, setShowComments] = useState(false);
+    const [comments, setComments] = useState([]);
+    const currentUser = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).username : null;
 
 
     const handleEditClick = () => {
@@ -33,12 +34,12 @@ function PostItem({ _id, text, picture, authorP, authorN, date, onDeletePost, on
         onSavePicture(editedPicture); // Save edited picture
         setEditing(false);
     };
-    
+
     const onSaveText = (editedText) => {
         // Implement logic to save edited text
         onEditPost(_id, 'text', editedText);
     };
-    
+
     const onSavePicture = (editedPicture) => {
         onEditPost(_id, 'picture', editedPicture);; // Update the picture in the state
     };
@@ -83,29 +84,31 @@ function PostItem({ _id, text, picture, authorP, authorN, date, onDeletePost, on
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
                 <div className="card-header d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center justify-content-center">
-                    <Link to={`/profile/${authorN}`} className="author-link">    
-                        <img src={authorP} className="rounded-circle me-2" alt="Author" style={{ width: '40px', height: '40px' }} />
-                        <span className="author-name">{authorN}</span>
-                    </Link>
+                        <Link to={`/profile/${username}`} className="author-link">
+                            <img src={authorP} className="rounded-circle me-2" alt="Author" style={{ width: '40px', height: '40px' }} />
+                            <span className="author-name">{authorN}</span>
+                        </Link>
                     </div>
                     <div className="d-flex align-items-between">
                         {/* Edit and Delete buttons */}
-                        <div className="d-flex align-items-between">
-                            {editing ? (
-                                <EditPostForm
-                                    initialText={text}
-                                    initialPicture={picture} // Pass the initial picture URL
-                                    onSave={handleSaveEdit}
-                                    onCancel={handleCancelEdit}
-                                    onEditPost={onEditPost} // Pass down the onEditPost function
-                                    onSavePicture={onSavePicture}
-                                />
-                            ) : (
-                            
-                            <EditPost onClick={handleEditClick} />
-                            )}
-                            <DeletePost onClick={handleDeleteClick} />
-                        </div>
+                        {currentUser === username && (
+                            <div className="d-flex align-items-between">
+                                {editing ? (
+                                    <EditPostForm
+                                        initialText={text}
+                                        initialPicture={picture} // Pass the initial picture URL
+                                        onSave={handleSaveEdit}
+                                        onCancel={handleCancelEdit}
+                                        onEditPost={onEditPost} // Pass down the onEditPost function
+                                        onSavePicture={onSavePicture}
+                                    />
+                                ) : (
+
+                                    <EditPost onClick={handleEditClick} />
+                                )}
+                                <DeletePost onClick={handleDeleteClick} />
+                            </div>
+                        )}
                         <div className="text-muted ml-2">{date}</div>
                     </div>
                 </div>
@@ -124,12 +127,12 @@ function PostItem({ _id, text, picture, authorP, authorN, date, onDeletePost, on
                     <ShareButton />
                 </div>
             </div>
-            {showComments && <CommentPopUp 
-                comments={comments} 
-                addComment={addComment} 
-                deleteComment={deleteComment} 
-                editComment={editComment} 
-                onClose={() => setShowComments(false)} 
+            {showComments && <CommentPopUp
+                comments={comments}
+                addComment={addComment}
+                deleteComment={deleteComment}
+                editComment={editComment}
+                onClose={() => setShowComments(false)}
             />}
         </div>
     );

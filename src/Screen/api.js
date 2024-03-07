@@ -57,6 +57,7 @@ export const fetchUserData = async (userId, token) => {
                 // If the request is successful, parse the response
                 const userData = await response.json();
                 console.log('User details:', userData);
+                return userData;
             } else {
                 // Handle error if the request fails
                 console.error('Error fetching user details:', response.statusText);

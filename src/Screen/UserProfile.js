@@ -29,7 +29,8 @@ const UserProfile = ({ token }) => {
                 .then(posts => setUserPosts(posts))
                 .catch(error => console.error('Error fetching user posts:', error));
             
-            fetchFriendsList(userData.id, token, handleFriendsListSuccess, handleFriendsListError);        
+            fetchFriendsList(userData.username, token, handleFriendsListSuccess, handleFriendsListError);        
+            console.log(userData.username + " " + userData.id);
         }
     }, [userData, token]);
 

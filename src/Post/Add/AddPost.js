@@ -17,11 +17,12 @@ const AddPost = ({ handleClosePopup, addNewPost, authorName, proPic }) => {
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
-        setImage(file);
+        
 
         // Display a preview of the selected image
         const reader = new FileReader();
         reader.onloadend = () => {
+            setImage(reader.result);
             setImagePreview(reader.result);
         };
         reader.readAsDataURL(file);
@@ -37,7 +38,7 @@ const AddPost = ({ handleClosePopup, addNewPost, authorName, proPic }) => {
         if (!isInputEmpty|| image) {   
         const newPost = {
             text: inputValue,
-            picture: image ? URL.createObjectURL(image) : '', // Set picture to URL if an image is attached
+            picture: image ||'', // Set picture to URL if an image is attached
             authorP: proPic, 
             authorN: authorName,
             date: new Date().toLocaleString() // Current date and time
