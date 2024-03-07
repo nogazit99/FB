@@ -26,7 +26,10 @@ const UserProfile = ({ token }) => {
         // Fetch user posts when user data is available
         if (userData) {
             fetchUserPosts(userData.username, token)
-                .then(posts => setUserPosts(posts))
+                .then(posts => {
+                    console.log('Posts:', posts);
+                    setUserPosts(posts);
+                })
                 .catch(error => console.error('Error fetching user posts:', error));
             
 

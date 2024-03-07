@@ -9,7 +9,8 @@ export const fetchUserPosts = async (userId, token, setPosts) => {
 
         if (response.ok) {
             const userPostsData = await response.json();
-            setPosts(userPostsData);
+            return userPostsData; // Return the posts
+            //setPosts(userPostsData);
         } else {
             console.error('Failed to fetch user posts:', response.statusText);
             return null;
