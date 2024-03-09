@@ -117,4 +117,28 @@ export const deleteUserProfile = async (userId, token) => {
 };
 
 
+export const sendFriendRequest = async (senderUser, friendUsername, token) => {
+    try {
+        const response = await fetch(`http://localhost:12345/api/users/${senderUser}/friends`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ friendUsername })
+        });
+
+        if (response.ok) {
+            console.log('Friend request sent successfully');
+        } else {
+            console.error('Failed to send friend request:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error sending friend request:', error.message);
+        throw error; // Re-throw the error to handle it in the component
+    }
+};
+
+
+
 
