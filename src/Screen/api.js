@@ -129,15 +129,19 @@ export const sendFriendRequest = async (senderUser, friendUsername, token) => {
         });
 
         if (response.ok) {
-            console.log('Friend request sent successfully');
+            // If the response is successful, return an object indicating success
+            return { success: true };
         } else {
-            console.error('Failed to send friend request:', response.statusText);
+            // If there's an error, parse the error message from the response and return it
+            const errorData = await response.json();
+            return { success: false, error: errorData.message };
         }
     } catch (error) {
-        console.error('Error sending friend request:', error.message);
-        throw error; // Re-throw the error to handle it in the component
+        // If an error occurs during the request, throw it to be handled in the component
+        throw error;
     }
 };
+
 
 
 

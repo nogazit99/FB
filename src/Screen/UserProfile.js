@@ -5,6 +5,7 @@ import Feed from './Feed';
 import EditProfilePopup from './EditProfilePopup';
 import FriendListPopup from './FriendList'; // Import the FriendListPopup component
 import { useParams, useNavigate } from 'react-router-dom';
+import FRequestsPopup from './FRequestsPopup';
 import { fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from './api';
 
 const UserProfile = ({ token }) => {
@@ -13,6 +14,7 @@ const UserProfile = ({ token }) => {
     const [showFriendList, setShowFriendList] = useState(false); // State to manage friend list popup
     const [userPosts, setUserPosts] = useState([]);
     const [friendsList, setFriendsList] = useState([]); // State to store friends list
+    const [showFriendRequests, setShowFriendRequests] = useState(false); // State for friend requests popup
     const navigate = useNavigate(); // Initialize navigate
 
     useEffect(() => {
@@ -68,6 +70,9 @@ const UserProfile = ({ token }) => {
         setShowFriendList(false);
     };
 
+    const handleOpenFriendRequests = () => setShowFriendRequests(true);
+    const handleCloseFriendRequests = () => setShowFriendRequests(false);
+
     const handleSaveUserData = async (editedField, value) => {
         try {
             await saveChanges(userData.username, { [editedField]: value }, token);
@@ -87,7 +92,7 @@ const UserProfile = ({ token }) => {
         try {
             await deleteUserProfile(userData.username, token);
             // If the delete request succeeds, navigate back to the feed page
-            navigate('/feed');
+            navigate('/');
         } catch (error) {
             console.error('Error deleting profile:', error.message);
             // Handle error display or logging here
@@ -129,6 +134,10 @@ const UserProfile = ({ token }) => {
                         <button className="btn btn-outline-secondary btn-sm btn-edit" onClick={deleteProfile}>
                             <i className="bi bi-trash"></i>Delete Profile
                         </button>
+                        {/* Button to open friend requests popup */}
+                        <button className="btn btn-outline-secondary btn-sm btn-edit" onClick={handleOpenFriendRequests}>
+                            <i className="bi bi-people-fill"></i>Friend Requests
+                        </button>
                     </div>
                 </div>
             </div>
@@ -147,6 +156,10 @@ const UserProfile = ({ token }) => {
                     friends={friendsList|| []} // Pass the list of friends
                     handleClose={handleCloseFriendList} // Pass the close handler
                 />
+            )}
+            {/* Friend requests popup */}
+            {showFriendRequests && (
+                <FRequestsPopup handleClose={handleCloseFriendRequests} />
             )}
             {/* User posts */}
             <div className="mt-4">
