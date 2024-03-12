@@ -8,6 +8,7 @@ const EditPostForm = ({ initialText, initialPicture, onSave, onCancel, onEditPos
   const textAreaRef = useRef(null);
   const fileInputRef = useRef(null);
 
+  
   useEffect(() => {
     // Focus the textarea when the component mounts
     textAreaRef.current.focus();

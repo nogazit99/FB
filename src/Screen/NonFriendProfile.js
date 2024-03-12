@@ -10,14 +10,14 @@ const NonFriendProfile = ({ senderUser, username, token }) => {
         // Fetch user data when the component mounts
         fetchUserData(username, token)
             .then(data => setUserData(data))
-            .catch(error => console.error('Error fetching user data:', error));
+            .catch(error => console.error('Error fetching non friend data:', error));
     }, [username, token]);
 
     // Function to handle sending a friend request
     const handleSendFriendRequest = async () => {
         try {
             // Send friend request and wait for response
-            const response = await sendFriendRequest(senderUser, username, token);
+            const response = await sendFriendRequest(username, token);
             
             // Check if the response indicates success
             if (response.success) {

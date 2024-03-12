@@ -1,4 +1,4 @@
-
+import Compressor from 'compressorjs'; 
 import React, { useState, useEffect, useRef } from 'react';
 import './AddPost.css';
 
@@ -17,15 +17,31 @@ const AddPost = ({ handleClosePopup, addNewPost, authorName, proPic }) => {
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
+        console.log("file", file);
         
+        new Compressor(file, {
+            quality: 0.6, 
+            success(result) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const imageData = reader.result.toString(); // Convert image data to string
+                    setImage(imageData); // Set the compressed image
+                    setImagePreview(reader.result);
+                };
+                reader.readAsDataURL(result);
+            },
+            error(err) {
+                console.error('Image compression failed:', err);
+            },
+        });
 
-        // Display a preview of the selected image
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setImage(reader.result);
-            setImagePreview(reader.result);
-        };
-        reader.readAsDataURL(file);
+        // // Display a preview of the selected image
+        // const reader = new FileReader();
+        // reader.onloadend = () => {
+        //     setImage(reader.result);
+        //     setImagePreview(reader.result);
+        // };
+        // reader.readAsDataURL(file);
     };
 
     const handleInputChange = (event) => {
@@ -36,14 +52,17 @@ const AddPost = ({ handleClosePopup, addNewPost, authorName, proPic }) => {
 
     const handlePost = () => {
         if (!isInputEmpty|| image) {   
-        const newPost = {
-            text: inputValue,
-            picture: image ||'', // Set picture to URL if an image is attached
-            authorP: proPic, 
-            authorN: authorName,
-            date: new Date().toLocaleString() // Current date and time
-        };
-        addNewPost(newPost); // Call the addPost function to add the new post
+        // const newPost = {
+            // text: inputValue || '',
+            // picture: image ||'', 
+            // authorP: proPic, 
+            // authorN: authorName,
+            // date: new Date().toLocaleString() // Current date and time
+        // };
+        // addNewPost(newPost); // Call the addPost function to add the new post
+
+
+        addNewPost(inputValue || '', image || ''); // Pass text and picture separately
         handleClosePopup(); // Close the popup after posting
         setInputValue(''); // Clear input after posting
         setIsInputEmpty(true); // Reset input validation

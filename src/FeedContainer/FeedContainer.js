@@ -5,6 +5,7 @@ import ThinkBox from '../Screen/ThinkBox';
 import AddPost from '../Post/Add/AddPost';
 import Feed from '../Screen/Feed';
 import PostItem from '../Post/PostItem';
+import {fetchUserPosts} from '../Screen/api'
 import '../Screen/style.css'; // Import your CSS file
 
 function FeedContainer({ token }) {
@@ -12,6 +13,7 @@ function FeedContainer({ token }) {
   const [userData, setUserData] = useState(null);
   const [posts, setPosts] = useState([]); // State to manage the list of posts
   const [nightMode, setNightMode] = useState(false); // State to track night mode
+  console.log("token in feedcontianer", token);
 
   useEffect(() => {
     // Fetch posts for the current user
@@ -27,12 +29,18 @@ function FeedContainer({ token }) {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch(`http://localhost:12345/api/posts`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
+      console.log("fetch posts token" + token);
+        // Create the request object with the appropriate headers
+      const request = new Request(`http://localhost:12345/api/posts`, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}`
+          }
       });
+
+      // Send the request
+      const response = await fetch(request);
+
       if (response.ok) {
         const postData = await response.json();
         console.log("Got Posts", postData);
@@ -56,7 +64,7 @@ function FeedContainer({ token }) {
 //   }
 // };
 
-const addNewPost = async (newPost) => {
+const addNewPost = async (text, picture) => {
   try {
     const response = await fetch(`http://localhost:12345/api/users/${userData.username}/posts`, {
       method: 'POST',
@@ -64,7 +72,7 @@ const addNewPost = async (newPost) => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newPost)
+      body: JSON.stringify({ text, picture }) // Send text and picture separately
     });
     if (response.ok) {
       const createdPost = await response.json();
@@ -96,6 +104,7 @@ const deletePost = async (postId) => {
       // If the request was successful, update the state by filtering out the deleted post
       setPosts(posts.filter(post => post.id !== postId));
       fetchPosts();
+      fetchUserPosts(userData.username, token);
     } else {
       console.error('Error deleting post:', response.statusText);
     }
@@ -105,15 +114,6 @@ const deletePost = async (postId) => {
 };
 
 
-// Function to edit a post
-// const editPost = (postId, editedContent) => {
-//   setPosts(posts.map(post => {
-//     if (post.id === postId) {
-//       return { ...post, text: editedContent };
-//     }
-//     return post;
-//   }));
-// };
 const editPost = async (postId, fieldName, newValue) => {
   try {
     const response = await fetch(`http://localhost:12345/api/Users/${userData.username}/posts/${postId}`, {
@@ -125,9 +125,9 @@ const editPost = async (postId, fieldName, newValue) => {
       body: JSON.stringify({ [fieldName]: newValue }) // Dynamically set the field name and new value
     });
     if (response.ok) {
-      // If the request was successful, update the state with the edited post
-      const updatedPost = await response.json();
-      setPosts(posts.map(post => (post.id === postId ? updatedPost : post)));
+      // If the request was successful, reload the page to reflect the changes
+      // fetchPosts();
+      // fetchUserPosts(userData.username, token);
     } else {
       console.error('Error editing post:', response.statusText);
     }
@@ -135,6 +135,7 @@ const editPost = async (postId, fieldName, newValue) => {
     console.error('Error editing post:', error);
   }
 };
+
 
 // Function to toggle night mode
 const toggleNightMode = () => {

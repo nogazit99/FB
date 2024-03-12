@@ -159,7 +159,10 @@ const UserProfile = ({ token }) => {
             )}
             {/* Friend requests popup */}
             {showFriendRequests && (
-                <FRequestsPopup handleClose={handleCloseFriendRequests} />
+                <FRequestsPopup handleClose={handleCloseFriendRequests}
+                                currentUser = {userData.username}
+                                token = {token}
+                />
             )}
             {/* User posts */}
             <div className="mt-4">

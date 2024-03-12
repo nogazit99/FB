@@ -1,5 +1,6 @@
 export const fetchUserPosts = async (userId, token, setPosts) => {
     try {
+        console.log("TOKEN ", token);
         const response = await fetch(`http://localhost:12345/api/users/${userId}/posts`, {
             method: 'GET',
             headers: {
@@ -45,6 +46,7 @@ export const saveChanges = async (userId, editedUserData, token) => {
 };
 
 export const fetchUserData = async (userId, token) => {
+        console.log("fetch user TOKEN ", token)
         // Fetch updated user details
         try {
             // Make a GET request to fetch user details using the provided token
@@ -67,7 +69,7 @@ export const fetchUserData = async (userId, token) => {
             // Handle any other errors that may occur during the request
             console.error('Error fetching user details:', error.message);
         }
-    }
+    };
 
 
 export const fetchFriendsList = async (userId, token) => {
@@ -99,8 +101,7 @@ export const deleteUserProfile = async (userId, token) => {
         const response = await fetch(url, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             }
         });
         
@@ -117,15 +118,14 @@ export const deleteUserProfile = async (userId, token) => {
 };
 
 
-export const sendFriendRequest = async (senderUser, friendUsername, token) => {
+export const sendFriendRequest = async (friendUsername, token) => {
     try {
-        const response = await fetch(`http://localhost:12345/api/users/${senderUser}/friends`, {
+        const response = await fetch(`http://localhost:12345/api/users/${friendUsername}/friends`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ friendUsername })
+            }
         });
 
         if (response.ok) {
