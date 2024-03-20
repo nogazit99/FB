@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import LoginForm from '../../LoginContainer/LoginForm';
 import SignupForm from '../../SignUpContainer/SignUpForm';
 import './ConnectRight.css';
+const config = require('../../config'); 
 
 
 function ConnectRight({ formToShow, setUsername, setToken  }) {
@@ -36,7 +37,7 @@ function ConnectRight({ formToShow, setUsername, setToken  }) {
 
         try {
             // Make a GET request to fetch user details using the provided token
-            const response = await fetch(`http://localhost:12345/api/users/${newUsername}`, {
+            const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${newUsername}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`

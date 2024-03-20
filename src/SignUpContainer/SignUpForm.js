@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Link ,useNavigate  } from 'react-router-dom';
 import { resizeFile } from 'react-image-file-resizer';
 import './SignUpForm.css';
+const config = require('../config'); 
+
 
 function SignupForm({ onSignup }) {
 
@@ -110,7 +112,7 @@ function SignupForm({ onSignup }) {
                     profilePic: formData.profilePicture // Assuming formData.profilePicture is a base64 encoded string
                 };
     
-                const response = await fetch('http://localhost:12345/api/users', {
+                const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

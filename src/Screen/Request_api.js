@@ -1,7 +1,7 @@
 // api.js
-
+const config = require('../config'); 
 export const acceptFriendRequest = async (userId, friendId, token) => {
-    const url = `http://localhost:12345/api/users/${userId}/friends/${friendId}`;
+    const url = `http://${config.server.ip}:${config.server.port}/api/users/${userId}/friends/${friendId}`;
 
     try {
         const response = await fetch(url, {
@@ -25,7 +25,7 @@ export const acceptFriendRequest = async (userId, friendId, token) => {
 };
 
 export const deleteFriendRequest = async (userId, friendId, token) => {
-    const url = `http://localhost:12345/api/users/${userId}/friends/${friendId}`;
+    const url = `http://${config.server.ip}:${config.server.port}/api/users/${userId}/friends/${friendId}`;
 
     try {
         const response = await fetch(url, {

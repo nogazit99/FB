@@ -1,7 +1,9 @@
+const config = require('../config');
+
 export const fetchUserPosts = async (userId, token, setPosts) => {
     try {
         console.log("TOKEN ", token);
-        const response = await fetch(`http://localhost:12345/api/users/${userId}/posts`, {
+        const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}/posts`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -26,7 +28,7 @@ export const saveChanges = async (userId, editedUserData, token) => {
     const { field, fieldValue } = editedUserData;
     try {
         const fieldValue = editedUserData[field];
-        const response = await fetch(`http://localhost:12345/api/users/${userId}`, {
+        const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -50,7 +52,7 @@ export const fetchUserData = async (userId, token) => {
         // Fetch updated user details
         try {
             // Make a GET request to fetch user details using the provided token
-            const response = await fetch(`http://localhost:12345/api/users/${userId}`, {
+            const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -74,7 +76,7 @@ export const fetchUserData = async (userId, token) => {
 
 export const fetchFriendsList = async (userId, token) => {
     try {
-        const response = await fetch(`http://localhost:12345/api/users/${userId}/friends`, {
+        const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}/friends`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -95,7 +97,7 @@ export const fetchFriendsList = async (userId, token) => {
 // api.js
 
 export const deleteUserProfile = async (userId, token) => {
-    const url = `http://localhost:12345/api/users/${userId}`;
+    const url = `http://${config.server.ip}:${config.server.port}/api/users/${userId}`;
     
     try {
         const response = await fetch(url, {
@@ -120,7 +122,7 @@ export const deleteUserProfile = async (userId, token) => {
 
 export const sendFriendRequest = async (friendUsername, token) => {
     try {
-        const response = await fetch(`http://localhost:12345/api/users/${friendUsername}/friends`, {
+        const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${friendUsername}/friends`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,

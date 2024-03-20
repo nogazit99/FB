@@ -7,6 +7,7 @@ import Feed from '../Screen/Feed';
 import PostItem from '../Post/PostItem';
 import {fetchUserPosts} from '../Screen/api'
 import '../Screen/style.css'; // Import your CSS file
+const config = require('../config'); 
 
 function FeedContainer({ token }) {
 
@@ -31,7 +32,7 @@ function FeedContainer({ token }) {
     try {
       console.log("fetch posts token" + token);
         // Create the request object with the appropriate headers
-      const request = new Request(`http://localhost:12345/api/posts`, {
+      const request = new Request(`http://${config.server.ip}:${config.server.port}/api/posts`, {
           method: 'GET',
           headers: {
               'Authorization': `Bearer ${token}`
@@ -66,7 +67,7 @@ function FeedContainer({ token }) {
 
 const addNewPost = async (text, picture) => {
   try {
-    const response = await fetch(`http://localhost:12345/api/users/${userData.username}/posts`, {
+    const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userData.username}/posts`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -94,7 +95,7 @@ const addNewPost = async (text, picture) => {
 
 const deletePost = async (postId) => {
   try {
-    const response = await fetch(`http://localhost:12345/api/Users/${userData.username}/posts/${postId}`, {
+    const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/Users/${userData.username}/posts/${postId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -116,7 +117,7 @@ const deletePost = async (postId) => {
 
 const editPost = async (postId, fieldName, newValue) => {
   try {
-    const response = await fetch(`http://localhost:12345/api/Users/${userData.username}/posts/${postId}`, {
+    const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/Users/${userData.username}/posts/${postId}`, {
       method: 'PATCH',
       headers: {
         'Authorization': `Bearer ${token}`,

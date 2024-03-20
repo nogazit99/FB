@@ -1,6 +1,8 @@
 import React, { useState } from 'react'; // Import useState from React
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './LoginForm.css';
+const config = require('../config'); 
+
 
 
 function LoginForm({ onLogin }) {
@@ -28,7 +30,7 @@ function LoginForm({ onLogin }) {
         let errors = {};
     
         try {
-            const response = await fetch('http://localhost:12345/api/tokens', {
+            const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/tokens`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
