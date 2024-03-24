@@ -21,13 +21,49 @@ Foobar is a social networking application similar to Facebook, designed to conne
 
 ## Running the code
 
-To get started with Foobar, follow these steps:
+1. Clone the repository:
 
-1. Clone the repository to your local machine.
-2. Navigate to your project directory.
-3. Install dependencies (if needed): If you haven't already installed the dependencies for your project, run npm install to install them. This command reads the package.json file in your project and installs all dependencies listed there.
-4. npm start
-5. Access the app: After running npm start, your React app should be running locally. You can access it by navigating to http://localhost:3000 in your web browser. This is the default address for the development server.
+   ```bash
+   git clone client
+   https://github.com/nogazit99/FB
+   git clone server
+   https://github.com/edenbdv/FooBar-Server.git 
+   ```
+the relevant branch in the FB repo is 'client' branch.
+
+
+2. Install dependencies for both client and server:
+
+   ```bash
+   cd foobar/client
+   npm install
+   cd ../server
+   npm install
+   ```
+
+3. Build the client-side code:
+
+   ```bash
+   npm run build
+   ```
+
+4. Copy the `build/static` folder into the server directory:
+
+
+5. Set up configuration:
+
+   - In the `config` folder of both client and server, modify the `config.js` file to include the appropriate IP address and port for your server.
+
+## Usage
+
+1. Run the server:
+
+   ```bash
+   node app.js
+   ```
+
+2. Access Foobar in your browser at `http://ip:port`.
+
 
 ## Work Process
 
