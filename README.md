@@ -6,7 +6,12 @@ Foobar is a social networking application similar to Facebook, designed to conne
 
 - **Sign Up and Login:** Foobar allows users to create accounts securely with a unique username and password. Users can then log in to access their account and use the app's features.
 
-- **Feed:** The heart of Foobar is its feed, where the user can see updates, posts, and media. 
+- **Feed:** The heart of Foobar is its feed, where the user can see updates, posts, and media.
+
+- it is important to say that at this current version we only support profile picture of certain size (60KB) and format (jpg). We are attaching an example of profile picture that is under these conditions and works.
+
+![7](https://github.com/nogazit99/FB/assets/148945751/1b879e8a-4df6-4795-be38-a158434cc232)
+
 
 ## Technologies Used
 
