@@ -32,39 +32,88 @@ function SignupForm({ onSignup }) {
 
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+       const { name, value } = e.target;
+
         setFormData({
             ...formData,
             [name]: value
         });
     };
 
-
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-
-        setFormData({
-            ...formData,
-            profilePicture: file
-        });
-
-        // Read the selected file and display it
         const reader = new FileReader();
-        reader.onload = (e) => {
-            const imageSrc = e.target.result;
-            const base64String = e.target.result;
-
-            setFormData({
-                ...formData,
-                profilePicture: base64String
-            });
-
-            // Set the image source directly
-            const previewImg = document.getElementById('profilePicturePreview');
-            previewImg.src = imageSrc;
+    
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target.result;
+    
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const MAX_WIDTH = 300; // Adjust as needed
+                const MAX_HEIGHT = 300; // Adjust as needed
+                let width = img.width;
+                let height = img.height;
+    
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+    
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+    
+                const base64String = canvas.toDataURL('image/jpeg'); // Convert to base64
+    
+                setFormData({
+                    ...formData,
+                    profilePicture: base64String
+                });
+    
+                // Set the image source directly
+                const previewImg = document.getElementById('profilePicturePreview');
+                previewImg.src = base64String;
+            };
         };
+    
         reader.readAsDataURL(file);
     };
+    
+
+    // const handleFileChange = (e) => {
+    //     const file = e.target.files[0];
+
+    //     setFormData({
+    //         ...formData,
+    //         profilePicture: file
+    //     });
+
+    //     // Read the selected file and display it
+    //     const reader = new FileReader();
+    //     reader.onload = (e) => {
+    //         const imageSrc = e.target.result;
+    //         const base64String = e.target.result;
+
+    //         setFormData({
+    //             ...formData,
+    //             profilePicture: base64String
+    //         });
+
+    //         // Set the image source directly
+    //         const previewImg = document.getElementById('profilePicturePreview');
+    //         previewImg.src = imageSrc;
+    //     };
+    //     reader.readAsDataURL(file);
+    //  };
 
 
     const handleSubmit = async (e) => {

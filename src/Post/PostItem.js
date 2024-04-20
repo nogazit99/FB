@@ -10,7 +10,7 @@ import EditPost from './Edit/EditPost';
 import EditPostForm from './Edit/EditPostForm'; // Import the EditPostForm component
 import DeletePost from './Delete/DeletePost';
 
-function PostItem({ _id, text, picture, authorP, authorN, date, username, onDeletePost, onEditPost }) {
+function PostItem({ _id, text, picture, authorP, authorN, date, username, onDelete, onEditPost }) {
 
     const [editing, setEditing] = useState(false);
     const [liked, setLiked] = useState(false);
@@ -75,7 +75,7 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
     };
 
     const handleDeleteClick = () => {
-        onDeletePost(_id); // Call the onDeletePost function with the id of the post to delete
+        onDelete(_id); // Call the onDeletePost function with the id of the post to delete
     };
 
     return (
@@ -84,10 +84,20 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
                 <div className="card-header d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center justify-content-center">
-                        <Link to={`/profile/${username}`} className="author-link">
+                    <Link
+                        to={{
+                            pathname: `/profile/${username}`,
+                            state: { onDelete, onEditPost }
+                        }}
+                        className="author-link"
+                    >
+                        <img src={authorP} className="rounded-circle me-2" alt="Author" style={{ width: '40px', height: '40px' }} />
+                        <span className="author-name">{authorN}</span>
+                    </Link>
+                        {/* <Link to={`/profile/${username}`} className="author-link">
                             <img src={authorP} className="rounded-circle me-2" alt="Author" style={{ width: '40px', height: '40px' }} />
                             <span className="author-name">{authorN}</span>
-                        </Link>
+                        </Link> */}
                     </div>
                     <div className="d-flex align-items-between">
                         {/* Edit and Delete buttons */}
@@ -106,7 +116,7 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
 
                                     <EditPost onClick={handleEditClick} />
                                 )}
-                                <DeletePost onClick={handleDeleteClick} />
+                                <DeletePost onDeletePost={DeletePost} onClick={handleDeleteClick} />
                             </div>
                         )}
                         <div className="text-muted ml-2">{date}</div>

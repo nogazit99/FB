@@ -17,9 +17,10 @@ const Feed = ({ posts, onDeletePost, onEditPost, token }) => {
             console.log("USER DATA: ", userData)
             if (userData) {
               // Extract only displayName and profilePicture from userData
-              const { displayName, profilePicture } = userData;
+              const { displayName, profilePic } = userData;
               // Create a new object with just displayName and profilePicture
-              const authorData = { displayName, profilePicture };
+              const authorData = { displayName, profilePicture: addPrefixIfNeeded(profilePic)  };
+              // const authorData = { displayName, profilePicture };
               const updatedPost = { ...post, authorData };
               return updatedPost;
             } else {
@@ -47,7 +48,7 @@ const Feed = ({ posts, onDeletePost, onEditPost, token }) => {
     if (!url.startsWith(prefix)) {
       return prefix + url;
     }
-    console.log(url);
+    //console.log(url);
     return url;
   };
   
@@ -62,15 +63,16 @@ const Feed = ({ posts, onDeletePost, onEditPost, token }) => {
           _id={post._id}
           text={post.text} // Pass the text of the post
           picture={addPrefixIfNeeded(post.picture)} // Pass the picture URL of the post with correct prefix
+          authorP={addPrefixIfNeeded(post.authorData ? post.authorData.profilePicture : '')} // Corrected prop name
           
-          authorP={addPrefixIfNeeded(post.authorData ? post.authorData.profilePicture : '')} // Pass the author profile picture URL with correct prefix
+          //authorP={post.authorData ? post.authorData.profilePicture : ''} // Pass the author profile picture URL with correct prefix
 
           //picture={post.picture || ''} // Pass the picture URL of the post
           //authorP={post.authorData ? post.authorData.profilePic : ''} // Pass the author profile picture URL
           authorN={post.authorData ? post.authorData.displayName : ''} // Pass the author name
           date={post.createdAt} // Pass the date of the post
           username={post.createdBy}
-          onDeletePost={() => onDeletePost(post._id)} // Pass the delete function with post id
+          onDelete={onDeletePost} // Pass the delete function with post id
           onEditPost={(fieldName, newValue) => onEditPost(post._id, fieldName, newValue)} // Pass the edit function with post id
         />
       ))}

@@ -8,7 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import FRequestsPopup from './FRequestsPopup';
 import { fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from './api';
 
-const UserProfile = ({ token }) => {
+const UserProfile = ({ token, onDelete, onEditPost }) => {
     const [userData, setUserData] = useState(null);
     const [showEditContainer, setShowEditContainer] = useState(false);
     const [showFriendList, setShowFriendList] = useState(false); // State to manage friend list popup
@@ -26,7 +26,7 @@ const UserProfile = ({ token }) => {
 
     useEffect(() => {
         // Fetch user posts when user data is available
-        if (userData) {
+        if (userData && token) {
             fetchUserPosts(userData.username, token)
                 .then(posts => {
                     console.log('Posts:', posts);
@@ -168,7 +168,7 @@ const UserProfile = ({ token }) => {
             <div className="mt-4">
                 <h2>User Posts</h2>
                 {/* Check if userPosts is not null before passing it to Feed */}
-                <Feed posts={userPosts || []} />
+                <Feed posts={userPosts || []} onDeletePost={onDelete} onEditPost={onEditPost} token={token} />
             </div>
         </div>
     );

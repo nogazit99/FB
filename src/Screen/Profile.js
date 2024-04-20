@@ -1,6 +1,6 @@
  
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import UserProfile from './UserProfile';
 import FriendProfile from './FriendProfile';
 import NonFriendProfile from './NonFriendProfile';
@@ -10,7 +10,10 @@ const Profile = ({ token }) => {
     const { username } = useParams(); // Get the username parameter from the URL
     const [friendsList, setFriendsList] = useState([]);
     const currentUser = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).username : null;
+    const location = useLocation();
 
+    // Extract onDelete and onEditPost from location.state
+    const { onDelete, onEditPost } = location.state || {};
 
     useEffect(() => {
         // Fetch the list of friends for the current user
@@ -28,14 +31,6 @@ const Profile = ({ token }) => {
     const isFriend = !isCurrentUser && friendsList.includes(username);
 
     return (
-        // <div>
-        //     {/* Render FriendProfile if username exists and doesn't match the currentUser, otherwise render UserProfile */}
-        //     {username && currentUser && username !== currentUser ? (
-        //         <FriendProfile username={username} token={token} />
-        //     ) : (
-        //         <UserProfile token={token} />
-        //     )}
-        // </div>
         <div>
         {/* Render FriendProfile if username exists and is a friend */}
         {username && isFriend ? (
@@ -46,7 +41,7 @@ const Profile = ({ token }) => {
                 <NonFriendProfile senderUser={currentUser} username={username} token={token} />
             ) : (
                 // Render UserProfile if username doesn't exist or is the same as the current user
-                <UserProfile token={token} />
+                <UserProfile token={token} onDelete={onDelete} onEditPost={onEditPost} />
             )
         )}
         </div>

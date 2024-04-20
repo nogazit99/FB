@@ -160,8 +160,8 @@ const editPost = async (postId, fieldName, newValue) => {
       console.log("name", fieldName);
       console.log("value", newValue);
       // If the request was successful, reload the page to reflect the changes
-      //fetchPosts();
-      //fetchUserPosts(userData.username, token);
+      fetchPosts();
+      fetchUserPosts(userData.username, token);
     } else {
       if (response.status === 403) {
         // Post editing not allowed, raise a Bootstrap notification
