@@ -29,19 +29,19 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
         setEditing(false);
     };
 
-    const handleSaveEdit = () => {
+    const handleSaveEdit = (editedText, editedPicture) => {
         onSaveText(editedText); // Save edited text
-        onSavePicture(editedPicture); // Save edited picture
+        //onSavePicture(editedPicture); // Save edited picture
         setEditing(false);
     };
 
     const onSaveText = (editedText) => {
         // Implement logic to save edited text
-        onEditPost(_id, 'text', editedText);
+        onEditPost('text', editedText);
     };
 
     const onSavePicture = (editedPicture) => {
-        onEditPost(_id, 'picture', editedPicture);; // Update the picture in the state
+        onEditPost('picture', editedPicture);; // Update the picture in the state
     };
 
     const toggleComments = () => {

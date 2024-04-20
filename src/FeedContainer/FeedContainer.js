@@ -55,13 +55,25 @@ function FeedContainer({ token }) {
   };
 
 
-
-// // Function to add a new post to the list
-// const addNewPost = (newPost) => {
-//   if (userData) {
-//     const postWithUserData = { ...newPost, displayName: userData.displayName, profilePicture: userData.profilePic };
-//     setPosts([postWithUserData, ...posts]);
-//     setPostIdCounter(prevCounter => prevCounter + 1); // Increment the counter for the next post
+// const addNewPost = async (text, picture) => {
+//   try {
+//     const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userData.username}/posts`, {
+//       method: 'POST',
+//       headers: {
+//         'Authorization': `Bearer ${token}`,
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({ text, picture }) // Send text and picture separately
+//     });
+//     if (response.ok) {
+//       const createdPost = await response.json();
+//       setPosts([createdPost, ...posts]);
+//       //setPostIdCounter(prevCounter => prevCounter + 1); // Increment the counter for the next post
+//     } else {
+//       console.error('Error adding post:', response.statusText);
+//     }
+//   } catch (error) {
+//     console.error('Error adding post:', error);
 //   }
 // };
 
@@ -73,19 +85,39 @@ const addNewPost = async (text, picture) => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ text, picture }) // Send text and picture separately
+      body: JSON.stringify({ text, picture })
     });
+    
     if (response.ok) {
       const createdPost = await response.json();
       setPosts([createdPost, ...posts]);
-      //setPostIdCounter(prevCounter => prevCounter + 1); // Increment the counter for the next post
     } else {
-      console.error('Error adding post:', response.statusText);
+      if (response.status === 403) {
+        // Post not allowed, raise a Bootstrap notification
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-danger';
+        alert.setAttribute('role', 'alert');
+        alert.innerText = 'Sorry, your post is not allowed.';
+        
+        // Append the alert to a suitable location in your DOM
+        const container = document.getElementById('notification-container');
+        container.appendChild(alert);
+        
+        // Remove the alert after a certain duration (optional)
+        setTimeout(() => {
+          container.removeChild(alert);
+        }, 5000); // Remove after 5 seconds
+      } else {
+        console.error('Error adding post:', response.statusText);
+        // Handle other error cases
+      }
     }
   } catch (error) {
     console.error('Error adding post:', error);
+    // Handle network errors
   }
 };
+
 
 
 // // Function to delete a post from the list
@@ -114,7 +146,6 @@ const deletePost = async (postId) => {
   }
 };
 
-
 const editPost = async (postId, fieldName, newValue) => {
   try {
     const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/Users/${userData.username}/posts/${postId}`, {
@@ -123,19 +154,63 @@ const editPost = async (postId, fieldName, newValue) => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ [fieldName]: newValue }) // Dynamically set the field name and new value
+      body: JSON.stringify({ fieldName: fieldName, fieldValue: newValue }) // Dynamically set the field name and new value
     });
     if (response.ok) {
+      console.log("name", fieldName);
+      console.log("value", newValue);
       // If the request was successful, reload the page to reflect the changes
-      // fetchPosts();
-      // fetchUserPosts(userData.username, token);
+      //fetchPosts();
+      //fetchUserPosts(userData.username, token);
     } else {
-      console.error('Error editing post:', response.statusText);
+      if (response.status === 403) {
+        // Post editing not allowed, raise a Bootstrap notification
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-danger';
+        alert.setAttribute('role', 'alert');
+        alert.innerText = 'Sorry, you are not allowed to edit this post.';
+        
+        // Append the alert to a suitable location in your DOM
+        const container = document.getElementById('notification-container');
+        container.appendChild(alert);
+        
+        // Remove the alert after a certain duration (optional)
+        setTimeout(() => {
+          container.removeChild(alert);
+        }, 5000); // Remove after 5 seconds
+      } else {
+        console.error('Error editing post:', response.statusText);
+        // Handle other error cases
+      }
     }
   } catch (error) {
     console.error('Error editing post:', error);
   }
 };
+
+
+
+// const editPost = async (postId, fieldName, newValue) => {
+//   try {
+//     const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/Users/${userData.username}/posts/${postId}`, {
+//       method: 'PATCH',
+//       headers: {
+//         'Authorization': `Bearer ${token}`,
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({ [fieldName]: newValue }) // Dynamically set the field name and new value
+//     });
+//     if (response.ok) {
+//       // If the request was successful, reload the page to reflect the changes
+//       // fetchPosts();
+//       // fetchUserPosts(userData.username, token);
+//     } else {
+//       console.error('Error editing post:', response.statusText);
+//     }
+//   } catch (error) {
+//     console.error('Error editing post:', error);
+//   }
+// };
 
 
 // Function to toggle night mode
@@ -165,6 +240,10 @@ return (
               authorName={userData ? userData.displayName : ''} />
           </div>
           <div className="row" style={{ height: 'calc(100% - 150px)' }}>
+
+            {/* Notification container */}
+            <div id="notification-container"></div>
+
             <Feed posts={posts}
               onDeletePost={deletePost}
               onEditPost={editPost}

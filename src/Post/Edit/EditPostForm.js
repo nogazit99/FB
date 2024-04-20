@@ -25,11 +25,22 @@ const EditPostForm = ({ initialText, initialPicture, onSave, onCancel, onEditPos
     }
   };
 
+  // const handleSave = () => {
+  //   onSave(editedText, editedPicture); // Call onSave with the id, editedText, and editedPicture
+  //   onEditPost(editedText, editedPicture); // Call onEditPost with the id, editedText, and editedPicture
+  //   onSavePicture(editedPicture); // Call onSavePicture with the editedPicture
+  // };
+
   const handleSave = () => {
-    onSave(editedText, editedPicture); // Call onSave with the id, editedText, and editedPicture
-    onEditPost(editedText, editedPicture); // Call onEditPost with the id, editedText, and editedPicture
-    onSavePicture(editedPicture); // Call onSavePicture with the editedPicture
+    //onSave(); // Call onSave without passing any arguments
+    onSave(editedText, editedPicture);
+    console.log("editpostform", editedText);
+    console.log("editpostform", editedPicture);
+
+    //onEditPost('text', editedText); // For editing text
+    //onEditPost('picture', editedPicture); // For editing picture
   };
+  
 
 
   const handleCancel = () => {
