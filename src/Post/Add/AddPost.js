@@ -16,24 +16,62 @@ const AddPost = ({ handleClosePopup, addNewPost, authorName, proPic }) => {
     }, []);
 
     const handleImageChange = (event) => {
+
         const file = event.target.files[0];
-        console.log("file", file);
+        const reader = new FileReader();
+    
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target.result;
+    
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const MAX_WIDTH = 300; // Adjust as needed
+                const MAX_HEIGHT = 300; // Adjust as needed
+                let width = img.width;
+                let height = img.height;
+    
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+    
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+    
+                const base64String = canvas.toDataURL('image/jpeg'); // Convert to base64
+                setImage(base64String);
+                setImagePreview(base64String);
+
+            };
+        };
+
+        reader.readAsDataURL(file);
         
-        new Compressor(file, {
-            quality: 0.6, 
-            success(result) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    const imageData = reader.result.toString(); // Convert image data to string
-                    setImage(imageData); // Set the compressed image
-                    setImagePreview(reader.result);
-                };
-                reader.readAsDataURL(result);
-            },
-            error(err) {
-                console.error('Image compression failed:', err);
-            },
-        });
+        // new Compressor(file, {
+        //     quality: 0.6, 
+        //     success(result) {
+        //         const reader = new FileReader();
+        //         reader.onloadend = () => {
+        //             const imageData = reader.result.toString(); // Convert image data to string
+        //             setImage(imageData); // Set the compressed image
+        //             setImagePreview(reader.result);
+        //         };
+        //         reader.readAsDataURL(result);
+        //     },
+        //     error(err) {
+        //         console.error('Image compression failed:', err);
+        //     },
+        // });
 
         // // Display a preview of the selected image
         // const reader = new FileReader();
