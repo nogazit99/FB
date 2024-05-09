@@ -2,6 +2,8 @@
 
 Foobar is a social networking application similar to Facebook, designed to connect people and support sharing of updates and photos.
 
+wiki: https://github.com/edenbdv/FooBar-Server/tree/main/wiki
+
 ## Features
 
 - **Sign Up and Login:** Foobar allows users to create accounts securely with a unique username and password. Users can then log in to access their account and use the app's features.
